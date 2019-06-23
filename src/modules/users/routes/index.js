@@ -1,9 +1,8 @@
 import { Router } from 'express'
 
 import functions from '../helpers/functions'
+import { self } from '../middleware'
 import { ignore } from '../../../middleware/reqHandlers'
-
-import patch from './patch'
 
 const Routes = Router()
 
@@ -16,7 +15,7 @@ Routes
   .patch(
     '/',
     ignore({ instance: 'body', fields: [ 'login', 'isActive' ] }),
-    patch,
+    self,
     functions.patch
   )
 

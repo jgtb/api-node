@@ -8,7 +8,7 @@ import passport from 'passport'
 
 import config from './config'
 
-import { beforeLoggers } from './middleware/loggers'
+import { beforeLoggers } from './loggers'
 import decoder from './middleware/decoder'
 import filters from './middleware/filters'
 import paginate from './middleware/paginate'

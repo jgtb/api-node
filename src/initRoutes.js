@@ -1,4 +1,4 @@
-import { afterLoggers } from './middleware/loggers'
+import { afterLoggers } from './/loggers'
 
 const fs = require('fs')
 

@@ -1,6 +1,4 @@
 export default (req, _, next) => {
-  const { id } = req.user
-
   const pipeline = [
     { $project: {
       _id: false,
@@ -10,7 +8,6 @@ export default (req, _, next) => {
     } }
   ]
 
-  req.params.id = id
   req.pipeline = pipeline
 
   next()
