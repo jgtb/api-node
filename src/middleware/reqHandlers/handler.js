@@ -1,6 +1,6 @@
 const matchFields = (fields, condition) => ([ key ]) => fields.includes(key) === condition
 
-const concat = (acc, [ key, value ]) => ({ ...acc, [key]: value })
+const reducer = (acc, [ key, value ]) => ({ ...acc, [key]: value })
 
 export default ({ condition }) => ({ instance, fields }) => (req, _, next) => {
   const reqInstance = req[instance]
@@ -10,7 +10,7 @@ export default ({ condition }) => ({ instance, fields }) => (req, _, next) => {
   const newInstance = Object
     .entries(reqInstance)
     .filter(matcher)
-    .reduce(concat, {})
+    .reduce(reducer, {})
 
   req[instance] = newInstance
 

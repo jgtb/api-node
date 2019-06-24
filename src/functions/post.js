@@ -3,7 +3,7 @@ import { onPostSuccess, onPostError } from '../support/responses/messages'
 
 export default (Schema, messageConfig) => async (req, res, next) => {
   try {
-    const { body, autoInject } = req
+    const { body, autoInject = {} } = req
 
     const payload = {
       ...body,

@@ -19,7 +19,15 @@ const textSeparateByCommas = ({ input, key }) => ({
   }
 })
 
+const count = {
+  $group: {
+    _id: null,
+    count: { $sum: 1 }
+  }
+}
+
 export {
   formatToDate,
-  textSeparateByCommas
+  textSeparateByCommas,
+  count
 }

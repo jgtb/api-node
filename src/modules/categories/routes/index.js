@@ -7,6 +7,6 @@ const Routes = Router()
 Routes
   .get('/', functions.get)
   .get('/paginated', functions.getWithPaginate)
-  .get('/:id', functions.getById)
+  .get('/details/:id', functions.getById)
 
 export default Routes

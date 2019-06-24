@@ -1,4 +1,4 @@
-import { afterLoggers } from './/loggers'
+import { afterLoggers } from './loggers'
 
 const fs = require('fs')
 

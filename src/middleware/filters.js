@@ -11,7 +11,7 @@ const removeEmpty = ([ _, value ]) => typeof value !== 'undefined'
 
 const transform = (props) => ([ key, value ]) => props[key](value)
 
-const concat = (acc, { key, value }) => ({ ...acc, [key]: value })
+const reducer = (acc, { key, value }) => ({ ...acc, [key]: value })
 
 export default (req, _, next) => {
   const { query } = req
@@ -24,7 +24,7 @@ export default (req, _, next) => {
     .filter(filterRemoveUnfoundKey)
     .filter(removeEmpty)
     .map(mapTransform)
-    .reduce(concat, {})
+    .reduce(reducer, {})
 
   req.filters = filters
 

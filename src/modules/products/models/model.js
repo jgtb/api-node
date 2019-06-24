@@ -12,16 +12,16 @@ export default {
     required: [true, REQUIRED],
     index: true
   },
-  categories: {
-    type: [mongoose.Types.ObjectId],
-    ref: 'categories',
-    exists: [true, INVALID],
-    validate: {
-      validator: atLeastValidator(1),
-      message: REQUIRED
-    },
-    index: true
-  },
+  // categories: {
+  //   type: [mongoose.Types.ObjectId],
+  //   ref: 'categories',
+  //   exists: [true, INVALID],
+  //   validate: {
+  //     validator: atLeastValidator(1),
+  //     message: REQUIRED
+  //   },
+  //   index: true
+  // },
   name: {
     type: String,
     unique: true,

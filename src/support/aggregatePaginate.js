@@ -1,20 +1,15 @@
-const $group = {
-  $group: {
-    _id: null,
-    total: { $sum: 1 }
-  }
-}
+import { count } from './aggregation'
 
 export default async (Schema, pipeline, { page, limit }) => {
   try {
     const [ $match, ...pipe ] = pipeline
 
-    const [ res = { total: 0 } ] = await Schema.aggregate([
+    const [ res = { count: 0 } ] = await Schema.aggregate([
       $match,
-      $group
+      { ...count }
     ])
 
-    const total = res.total
+    const total = res.count
 
     const pages = Math.ceil(total / limit)
     const skip = limit * (page - 1)

@@ -12,7 +12,7 @@ Routes
   .get('/paginated', self, user, categories, functions.getWithPaginate)
   .get('/me', autoInject, self, user, categories, functions.get)
   .get('/me/paginated', autoInject, self, user, categories, functions.getWithPaginate)
-  .get('/:id', self, user, categories, functions.getById)
+  .get('/details/:id', self, user, categories, functions.getById)
   .post('/', autoInject, functions.post)
   .patch('/:id', autoInject, functions.patch)
   .patch('/status/:id', autoInject, functions.activateDeactivate)

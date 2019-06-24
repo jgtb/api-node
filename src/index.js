@@ -52,5 +52,3 @@ app.listen(PORT, () => {
 })
 
 app.use(unauthorized)
-
-export default app

@@ -5,7 +5,7 @@ import { updateOptions, unauthorizedModel } from './_utils'
 
 export default (Schema, messageConfig) => async (req, res, next) => {
   try {
-    const { params, autoInject, body } = req
+    const { params, autoInject = {}, body } = req
     const { id } = params
 
     const finder = {
