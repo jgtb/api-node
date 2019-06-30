@@ -1,6 +1,6 @@
-import { afterLoggers } from './loggers'
+import fs from 'fs'
 
-const fs = require('fs')
+import { afterLoggers } from './loggers'
 
 const base = '/api/v1'
 

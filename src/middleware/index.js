@@ -7,7 +7,7 @@ import paginate from './paginate'
 import pipeline from './pipeline'
 import sort from './sort'
 import unauthorized from './unauthorized'
-import unlessPath from './unlessPath'
+import jwt from './jwt'
 
 export {
   accept,
@@ -20,5 +20,5 @@ export {
   pipeline,
   sort,
   unauthorized,
-  unlessPath
+  jwt
 }

@@ -2,11 +2,8 @@ import bodyParser from 'body-parser'
 import compression from 'compression'
 import cors from 'cors'
 import express from 'express'
-import jwt from 'express-jwt'
 import helmet from 'helmet'
 import passport from 'passport'
-
-import config from './config'
 
 import { beforeLoggers } from './loggers'
 import {
@@ -16,7 +13,7 @@ import {
   sort,
   pipeline,
   unauthorized,
-  unlessPath
+  jwt
 } from './middleware'
 
 import initDatabase from './initDatabase'
@@ -44,7 +41,7 @@ app.use(paginate)
 app.use(sort)
 app.use(pipeline)
 
-app.use(jwt({ secret: config.secret }).unless(unlessPath))
+app.use(jwt)
 
 initDatabase()
 initRoutes({ app })

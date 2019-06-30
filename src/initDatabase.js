@@ -6,8 +6,9 @@ const options = { useCreateIndex: true, useFindAndModify: false, useNewUrlParser
 
 export default async () => {
   try {
-    await mongoose.connect(config.mongoDB, options)
-    console.log(`Connected on MongoDB: ${config.mongoDB}.`)
+    const { mongoDB } = config
+    await mongoose.connect(mongoDB, options)
+    console.log(`Connected on MongoDB: ${mongoDB}.`)
   } catch ({ message }) {
     console.log({ err: message })
   }
