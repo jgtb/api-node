@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import functions from '../helpers/functions'
 import { self } from '../middleware'
-import { ignore } from '../../../middleware/reqHandlers'
+import { ignore } from '../../../middleware'
 
 const Routes = Router()
 

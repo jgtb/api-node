@@ -9,13 +9,15 @@ import passport from 'passport'
 import config from './config'
 
 import { beforeLoggers } from './loggers'
-import decoder from './middleware/decoder'
-import filters from './middleware/filters'
-import paginate from './middleware/paginate'
-import sort from './middleware/sort'
-import pipeline from './middleware/pipeline'
-import unauthorized from './middleware/unauthorized'
-import unlessPath from './middleware/unlessPath'
+import {
+  decoder,
+  filters,
+  paginate,
+  sort,
+  pipeline,
+  unauthorized,
+  unlessPath
+} from './middleware'
 
 import initDatabase from './initDatabase'
 import initRoutes from './initRoutes'

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import { ObjectId } from 'mongoose'
 
 import { atLeastValidator } from '../../../support/validations'
 
@@ -6,22 +6,22 @@ import { REQUIRED, INVALID } from '../../../support/validations/messages'
 
 export default {
   user: {
-    type: mongoose.Types.ObjectId,
+    type: ObjectId,
     ref: 'users',
     exists: [true, INVALID],
     required: [true, REQUIRED],
     index: true
   },
-  // categories: {
-  //   type: [mongoose.Types.ObjectId],
-  //   ref: 'categories',
-  //   exists: [true, INVALID],
-  //   validate: {
-  //     validator: atLeastValidator(1),
-  //     message: REQUIRED
-  //   },
-  //   index: true
-  // },
+  categories: {
+    type: Array,
+    ref: 'categories',
+    exists: [true, INVALID],
+    validate: {
+      validator: atLeastValidator(1),
+      message: REQUIRED
+    },
+    index: true
+  },
   name: {
     type: String,
     unique: true,

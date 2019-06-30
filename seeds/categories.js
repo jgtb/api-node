@@ -2,14 +2,12 @@ import CategoriesSchema from '../src/modules/categories/models/schema'
 
 import asyncForEach from '../src/support/asyncForEach'
 
-import chance from 'chance'
-
-const Chance = chance()
+import Faker from './_faker'
 
 export default async () => {
-  await asyncForEach(Array.from({ length: 12 }), async () => {
+  await asyncForEach(Array.from({ length: 36 }), async () => {
     await CategoriesSchema({
-      name: Chance.name()
+      name: Faker.name()
     }).save()
   })
 }

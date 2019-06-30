@@ -5,8 +5,12 @@ import transactions from './transactions'
 
 import initDatabase from '../src/initDatabase'
 
-const seeders = async () => {
+import dropDatabase from './_dropDatabase'
+
+const seeds = async () => {
   await initDatabase()
+
+  await dropDatabase()
 
   await users()
   await categories()
@@ -16,4 +20,4 @@ const seeders = async () => {
   process.exit()
 }
 
-seeders()
+seeds()

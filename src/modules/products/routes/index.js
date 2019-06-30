@@ -3,7 +3,7 @@ import { Router } from 'express'
 import functions from '../helpers/functions'
 import { self, user, categories } from '../pipeline'
 
-import autoInject from '../middleware/autoInject'
+import { autoInject } from '../middleware'
 
 const Routes = Router()
 

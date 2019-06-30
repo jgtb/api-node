@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "local": "export NODE_ENV='local' && nodemon --exec babel-node src/index.js",
-    "seeders": "export NODE_ENV='local' && babel-node seeders/index.js",
+    "seeds": "export NODE_ENV='local' && babel-node seeds/index.js",
     "start": "babel-node src/index.js"
   },
   "keywords": [],
@@ -24,7 +24,6 @@
     "moment": "^2.24.0",
     "mongoose": "^5.5.5",
     "mongoose-exists": "^0.7.2",
-    "mongoose-idexists": "^1.0.5",
     "mongoose-unique-validator": "^2.0.3",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

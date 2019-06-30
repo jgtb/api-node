@@ -7,7 +7,7 @@ const props = {
 }
 
 const removeUnfoundKey = (props) => ([ key ]) => Object.keys(props).includes(key)
-const removeEmpty = ([ _, value ]) => typeof value !== 'undefined'
+const removeEmpty = ([ _, value ]) => !!value
 
 const transform = (props) => ([ key, value ]) => props[key](value)
 

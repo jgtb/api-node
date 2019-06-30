@@ -10,6 +10,4 @@ const configs = {
 
 const config = configs[process.env.NODE_ENV]
 
-console.log(config)
-
 export default config

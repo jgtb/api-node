@@ -19,10 +19,12 @@ export default (Schema, messageConfig) => async (req, res, next) => {
 
     const onSuccessMessage = onGetSuccess(messageConfig)
     const successResponse = onSuccess(200, onSuccessMessage, data)
+
     res.status(200).send(successResponse)
   } catch (err) {
     const onErrorMessage = onGetError(messageConfig)
     const errorResponse = onError(409, onErrorMessage, err)
+
     res.status(409).send(errorResponse)
   } finally {
     next()
