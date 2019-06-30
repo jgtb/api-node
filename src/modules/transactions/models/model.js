@@ -3,7 +3,15 @@ import mongoose from 'mongoose'
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
 
 export default {
+  uuid: String,
   user: {
+    type: mongoose.Types.ObjectId,
+    ref: 'users',
+    exists: [true, INVALID],
+    required: [true, REQUIRED],
+    index: true
+  },
+  to: {
     type: mongoose.Types.ObjectId,
     ref: 'users',
     exists: [true, INVALID],

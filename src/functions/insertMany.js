@@ -7,7 +7,7 @@ export default (Schema, messageConfig) => async (req, res, next) => {
 
     const payloads = body.map(payload => ({ ...payload, ...autoInject }))
 
-    await Schema.insertMany(payloads)
+    await Schema.create(payloads)
 
     const onSuccessMessage = onPostSuccess(messageConfig)
     const successResponse = onSuccess(200, onSuccessMessage)

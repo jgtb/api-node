@@ -4,7 +4,8 @@ export default (req, _, next) => {
       _id: false,
       name: 1,
       phone: 1,
-      email: 1
+      email: 1,
+      wallet: 1
     } }
   ]
 

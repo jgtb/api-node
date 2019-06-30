@@ -16,6 +16,5 @@ Routes
   .post('/', autoInject, functions.post)
   .patch('/:id', autoInject, functions.patch)
   .patch('/status/:id', autoInject, functions.activateDeactivate)
-  .delete('/:id', autoInject, functions.delete)
 
 export default Routes

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import { ObjectId } from 'mongoose'
 
 import { autoInject } from '../../../middleware'
 
@@ -9,6 +9,6 @@ export default autoInject({
   },
   to: {
     key: 'user',
-    handler: (value) => mongoose.Types.ObjectId(value)
+    handler: ObjectId
   }
 })
