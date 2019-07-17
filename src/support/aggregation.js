@@ -1,8 +1,6 @@
-const formatToDate = ({ key, format = '%d/%m/%Y' }) => ({
+const formatToDate = ({ key, format = '%d/%m/%Y', timezone = 'America/Sao_Paulo' }) => ({
   $addFields: {
-    [key]: { $dateToString: {
-      format, date: `$${key}`, timezone: 'America/Sao_Paulo'
-    } }
+    [key]: { $dateToString: { format, date: `$${key}`, timezone } }
   }
 })
 

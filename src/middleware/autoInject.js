@@ -1,10 +1,11 @@
-export default ({ where, to }) => (req, _, next) => {
-  const { instance, param } = where
-  const { key, handler = (item) => item } = to
+import { ObjectId } from 'mongoose'
 
-  const value = req[instance][param]
+export default (req, _, next) => {
+  const { id } = req.user
 
-  req.autoInject = { [key]: handler(value) }
+  req.autoInject = {
+    owner: ObjectId(id)
+  }
 
   next()
 }

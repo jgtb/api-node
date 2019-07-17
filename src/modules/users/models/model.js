@@ -1,8 +1,17 @@
-import { cellPhoneValidator, emailValidator } from '../../../support/validations'
+import { cellPhoneValidator, emailValidator, atLeastValidator } from '../../../support/validations'
 
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
 
 export default {
+  roles: {
+    type: Array,
+    exists: [true, INVALID],
+    validate: {
+      validator: atLeastValidator(1),
+      message: REQUIRED
+    },
+    index: true
+  },
   name: {
     type: String,
     unique: true,

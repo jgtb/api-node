@@ -1,13 +1,26 @@
-// export default (...permissions) => async (req, res, next) => {
-//   const { id } = req.user
+import UsersSchema from '../modules/users/models/schema'
 
-//   const user = await UsersSchema
-//     .findById(id)
-//     .lean()
+const atLeastOne = (roles) => (permission) => roles.includes(permission)
 
-//   if (!user || !user.isActive) {
-//     return res.status(401).json({})
-//   }
+export default (...permissions) => async (req, res, next) => {
+  const { id } = req.user
 
-//   next()
-// }
+  const user = await UsersSchema
+    .findById(id)
+    .select('roles isActive')
+    .lean()
+
+  const atLeastOneRole = atLeastOne(user.roles)
+
+  const hasPermission = permissions.some(atLeastOneRole)
+
+  if (!hasPermission) {
+    return res.status(401).json({})
+  }
+
+  if (!user || !user.isActive) {
+    return res.status(401).json({})
+  }
+
+  next()
+}

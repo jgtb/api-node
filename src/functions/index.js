@@ -7,13 +7,23 @@ import patch from './patch'
 import _delete from './delete'
 import activateDeactivate from './activateDeactivate'
 
-export default (Schema, messageConfig) => ({
-  get: get(Schema, messageConfig),
-  getWithPaginate: getWithPaginate(Schema, messageConfig),
-  getById: getById(Schema, messageConfig),
-  post: post(Schema, messageConfig),
-  insertMany: insertMany(Schema, messageConfig),
-  patch: patch(Schema, messageConfig),
-  delete: _delete(Schema, messageConfig),
-  activateDeactivate: activateDeactivate(Schema, messageConfig)
-})
+const reducer = (params) => (acc, [ key, value ]) => ({ ...acc, [key]: value(...params) })
+
+const functions = {
+  get,
+  getWithPaginate,
+  getById,
+  post,
+  insertMany,
+  patch,
+  delete: _delete,
+  activateDeactivate
+}
+
+export default (...params) => {
+  const onReducer = reducer(params)
+
+  return Object
+    .entries(functions)
+    .reduce(onReducer, {})
+}
