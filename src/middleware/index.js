@@ -1,24 +1,10 @@
-import { accept, ignore } from './reqHandlers'
-import ACL from './ACL'
-import autoInject from './autoInject'
-import decoder from './decoder'
-import filters from './filters'
-import paginate from './paginate'
-import pipeline from './pipeline'
-import sort from './sort'
-import unauthorized from './unauthorized'
-import jwt from './jwt'
-
-export {
-  accept,
-  ignore,
-  ACL,
-  autoInject,
-  decoder,
-  filters,
-  paginate,
-  pipeline,
-  sort,
-  unauthorized,
-  jwt
-}
+export { accept, ignore } from './reqHandlers'
+export { default as ACL } from './ACL'
+export { default as autoInject } from './autoInject'
+export { default as decoder } from './decoder'
+export { default as filters } from './filters'
+export { default as paginate } from './paginate'
+export { default as pipeline } from './pipeline'
+export { default as sort } from './sort'
+export { default as unauthorized } from './unauthorized'
+export { default as jwt } from './jwt'

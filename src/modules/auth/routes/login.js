@@ -1,6 +1,6 @@
 import LocalPassport from '../helpers/localPassport'
 
-import generateToken from '../../../support/token/generateToken'
+import { generateToken } from '../../../support/token'
 
 import passport from 'passport'
 

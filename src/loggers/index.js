@@ -1,7 +1,2 @@
-import afterLoggers from './after'
-import beforeLoggers from './before'
-
-export {
-  afterLoggers,
-  beforeLoggers
-}
+export { default as afterLoggers } from './after'
+export { default as beforeLoggers } from './before'

@@ -46,8 +46,6 @@ app.use(jwt)
 initDatabase()
 initRoutes({ app })
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV} mode.`)
-})
+app.listen(PORT, () => console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV} mode.`))
 
 app.use(unauthorized)

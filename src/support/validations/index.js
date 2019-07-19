@@ -1,14 +1,5 @@
-import { cellPhoneValidator, commercialPhoneValidator } from './phone'
-import emailValidator from './email'
-import atLeastValidator from './atLeast'
-import uniqueValidator from './unique'
-import existsValidator from './exists'
-
-export {
-  cellPhoneValidator,
-  commercialPhoneValidator,
-  emailValidator,
-  atLeastValidator,
-  uniqueValidator,
-  existsValidator
-}
+export { default as cellPhoneValidator, default as commercialPhoneValidator } from './phone'
+export { default as emailValidator } from './email'
+export { default as atLeastValidator } from './atLeast'
+export { default as uniqueValidator } from './unique'
+export { default as existsValidator } from './exists'

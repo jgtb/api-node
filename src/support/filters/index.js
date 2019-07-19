@@ -1,13 +1,5 @@
-import string from './string'
-import boolean from './boolean'
-import array from './array'
-import period from './period'
-import self from './self'
-
-export {
-  string,
-  boolean,
-  array,
-  period,
-  self
-}
+export { default as string } from './string'
+export { default as boolean } from './boolean'
+export { default as array } from './array'
+export { default as period } from './period'
+export { default as self } from './self'

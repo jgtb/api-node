@@ -1,9 +1,3 @@
-import onSuccessWithData from './successWithData'
-import onSuccess from './success'
-import onError from './error'
-
-export {
-  onSuccessWithData,
-  onSuccess,
-  onError
-}
+export { default as onSuccessWithData } from './successWithData'
+export { default as onSuccess } from './success'
+export { default as onError } from './error'

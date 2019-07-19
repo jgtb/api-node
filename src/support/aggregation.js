@@ -1,6 +1,8 @@
+import { concat } from 'ramda'
+
 const formatToDate = ({ key, format = '%d/%m/%Y', timezone = 'America/Sao_Paulo' }) => ({
   $addFields: {
-    [key]: { $dateToString: { format, date: `$${key}`, timezone } }
+    [key]: { $dateToString: { format, date: concat('$', key), timezone } }
   }
 })
 
@@ -8,9 +10,9 @@ const textSeparateByCommas = ({ input, key }) => ({
   $trim: {
     input: {
       $reduce: {
-        input: `$${input}`,
+        input: concat('$', input),
         initialValue: '',
-        in: { $concat: [ '$$value', ', ', `$$this.${key}` ] }
+        in: { $concat: [ '$$value', ', ', concat('$$this.', key) ] }
       }
     },
     chars: ', '
