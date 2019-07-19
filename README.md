@@ -1,4 +1,4 @@
-### seeders
+### seeds
 
 ### initDatabase.js
 
@@ -28,6 +28,14 @@
 
 - insertMany
 
+### src/loggers
+
+- models
+
+- after
+
+- before
+
 ### src/middleware
 
 - ACL
@@ -44,9 +52,15 @@
 
 - sort
 
-- unauthorized
+- accept
+
+- ignore
 
 - unlessPath
+
+- jwt
+
+- unauthorized
 
 ### src/modules
 
@@ -72,16 +86,20 @@
 
 ### Packages
 
-"bcryptjs": "^2.4.3",
-"chance": "^1.0.18",
-"express": "^4.16.3",
-"express-jwt": "^5.3.1",
-"jwt-decode": "^2.2.0",
-"moment": "^2.24.0",
-"mongoose": "^5.5.5",
-"mongoose-exists": "^0.7.2",
-"mongoose-unique-validator": "^2.0.3",
-"passport": "^0.4.0",
-"passport-local": "^1.0.0",
-"ramda": "^0.26.1",
-"uuid": "^3.3.2"
+express
+express-jwt
+jwt-decode
+
+passport
+passport-local
+
+bcryptjs
+      
+mongoose
+mongoose-exists
+mongoose-unique-validator
+
+moment
+ramda
+uuid
+chance
