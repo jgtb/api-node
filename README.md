@@ -86,20 +86,20 @@
 
 ### Packages
 
-express
-express-jwt
-jwt-decode
+- express
+- express-jwt
+- jwt-decode
 
-passport
-passport-local
+- passport
+- passport-local
 
-bcryptjs
+- bcryptjs
       
-mongoose
-mongoose-exists
-mongoose-unique-validator
+- mongoose
+- mongoose-exists
+- mongoose-unique-validator
 
-moment
-ramda
-uuid
-chance
+- moment
+- ramda
+- uuid
+- chance
