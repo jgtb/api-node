@@ -10,15 +10,15 @@ export default (...permissions) => async (req, res, next) => {
     .select('roles isActive')
     .lean()
 
+  if (!user || !user.isActive) {
+    return res.status(401).json({})
+  }
+
   const atLeastOneRole = atLeastOne(user.roles)
 
   const hasPermission = permissions.some(atLeastOneRole)
 
   if (!hasPermission) {
-    return res.status(401).json({})
-  }
-
-  if (!user || !user.isActive) {
     return res.status(401).json({})
   }
 

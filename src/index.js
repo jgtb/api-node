@@ -35,11 +35,11 @@ app.use(passport.session())
 app.use(helmet())
 
 app.use(decoder)
-app.use(beforeLoggers)
 app.use(filters)
 app.use(paginate)
 app.use(sort)
 app.use(pipeline)
+app.use(beforeLoggers)
 
 app.use(jwt)
 

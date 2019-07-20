@@ -10,11 +10,8 @@ export default (req, _, next) => {
       next()
       return
     }
-
-    next()
-    return
   }
 
-  req.user = undefined
+  req.user = {}
   next()
 }
