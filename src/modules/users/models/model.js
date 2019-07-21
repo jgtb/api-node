@@ -1,4 +1,5 @@
-import { REQUIRED, MINLENGTH, MAXLENGTH } from '../../../support/validations/messages'
+import { cellPhoneValidator, emailValidator } from '../../../support/validations'
+import { REQUIRED, INVALID, MINLENGTH, MAXLENGTH } from '../../../support/validations/messages'
 import { unFormat } from '../../../support/utils'
 
 export default {
@@ -14,14 +15,22 @@ export default {
     unique: true,
     required: [true, REQUIRED],
     trim: true,
-    index: true
+    index: true,
+    validate: {
+      validator: cellPhoneValidator,
+      message: INVALID
+    }
   },
   email: {
     type: String,
     unique: true,
     required: [true, REQUIRED],
     trim: true,
-    index: true
+    index: true,
+    validate: {
+      validator: emailValidator,
+      message: INVALID
+    }
   },
   password: {
     type: String,

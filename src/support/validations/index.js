@@ -1,6 +1,6 @@
-export { default as cellPhoneValidator, default as commercialPhoneValidator } from './phone'
+export { cellPhoneValidator, commercialPhoneValidator } from './phone'
 export { default as emailValidator } from './email'
 export { default as atLeastValidator } from './atLeast'
 export { default as uniqueValidator } from './unique'
 export { default as existsValidator } from './exists'
-export { default as zipcodeValidator } from './zipcode'
+export { default as addressesValidator } from './addresses'
