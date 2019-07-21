@@ -2,6 +2,10 @@ import Schema from '../models/schema'
 
 import functions from '../../../functions'
 
-const FUNCTIONS = functions(Schema, { single: 'Cliente', plural: 'Clientes', type: 'o' })
+const messageConfig = { single: 'Cliente', plural: 'Clientes', type: 'o' }
+
+const FUNCTIONS = functions(Schema, messageConfig)
+
+export { messageConfig }
 
 export default FUNCTIONS

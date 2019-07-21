@@ -1,17 +1,6 @@
-import { onError } from '../../../support/responses'
+import { messageConfig } from '../helpers/functions'
 
-import { addressesValidator } from '../../../support/validations'
-import { INVALID } from '../../../support/validations/messages'
+import { validateAddresses } from '../../../middleware'
+import { onPatchError } from '../../../support/responses/messages'
 
-export default async (req, res, next) => {
-  const { zipcode, state, city } = req.body
-
-  const response = await addressesValidator({ zipcode, state, city })
-
-  if (!response) {
-    const errorResponse = onError(409, '', { addresses: { message: INVALID } })
-    return res.status(409).json(errorResponse)
-  }
-
-  next()
-}
+export default validateAddresses({ messageConfig, messageCallback: onPatchError })
