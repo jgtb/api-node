@@ -44,7 +44,7 @@ app.use(beforeLoggers)
 app.use(jwt)
 
 initDatabase()
-initRoutes({ app })
+initRoutes(app)
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV} mode.`))
 

@@ -4,7 +4,7 @@ import { afterLoggers } from './loggers'
 
 const base = '/api/v1'
 
-const start = ({ app }) => (MODULE) => {
+const start = (app) => (MODULE) => {
   try {
     const Route = require(`${__dirname}/modules/${MODULE}/routes`).default
     const path = `${base}/${MODULE}/`
@@ -14,8 +14,8 @@ const start = ({ app }) => (MODULE) => {
   }
 }
 
-export default ({ app }) => {
-  const makeStart = start({ app })
+export default (app) => {
+  const makeStart = start(app)
 
   const modules = fs.readdirSync(`${__dirname}/modules`)
   modules.forEach(makeStart)

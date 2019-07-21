@@ -6,7 +6,7 @@ export default async ({ zipcode, state, city }) => {
   const baseUrl = url(zipcode)
   try {
     const { data } = await axios.get(baseUrl)
-    console.log(data)
+    return data && data.uf === state && data.localidade === city
   } catch (err) {
     return false
   }
