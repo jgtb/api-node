@@ -1,17 +1,14 @@
 import { Router } from 'express'
 
 import functions from '../helpers/functions'
+import { autoInject } from '../middleware'
 
 const Routes = Router()
 
 Routes
-  .get('/paginated', functions.getWithPaginate)
-  .get('/', functions.get)
-  .get('/:id', functions.getById)
+  .get('/profile', autoInject, functions.getById)
   .post('/', functions.post)
-  .post('/many', functions.insertMany)
-  .patch('/:id', functions.patch)
-  .patch('/activateDeactivate/:id', functions.activateDeactivate)
-  .delete('/:id', functions.delete)
+  .patch('/', autoInject, functions.patch)
+  .put('/addresses', autoInject, functions.putArray('addresses'))
 
 export default Routes

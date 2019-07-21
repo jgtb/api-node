@@ -4,6 +4,7 @@ import getById from './getById'
 import post from './post'
 import insertMany from './insertMany'
 import patch from './patch'
+import putArray from './putArray'
 import _delete from './delete'
 import activateDeactivate from './activateDeactivate'
 
@@ -16,6 +17,7 @@ const functions = {
   post,
   insertMany,
   patch,
+  putArray,
   delete: _delete,
   activateDeactivate
 }

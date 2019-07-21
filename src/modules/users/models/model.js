@@ -1,4 +1,5 @@
-import { REQUIRED } from '../../../support/validations/messages'
+import { REQUIRED, MINLENGTH, MAXLENGTH } from '../../../support/validations/messages'
+import { unFormat } from '../../../support/utils'
 
 export default {
   name: {
@@ -8,17 +9,66 @@ export default {
     trim: true,
     index: true
   },
-  login: {
+  phone: {
     type: String,
     unique: true,
     required: [true, REQUIRED],
-    trim: true
+    trim: true,
+    index: true
+  },
+  email: {
+    type: String,
+    unique: true,
+    required: [true, REQUIRED],
+    trim: true,
+    index: true
   },
   password: {
     type: String,
     required: [true, REQUIRED],
-    trim: true
+    trim: true,
+    minlength: [6, MINLENGTH(6)],
+    maxlength: [12, MAXLENGTH(12)]
   },
+  addresses: [
+    {
+      zipcode: {
+        type: String,
+        required: [true, REQUIRED],
+        trim: true,
+        set: unFormat
+      },
+      state: {
+        type: String,
+        required: [true, REQUIRED],
+        trim: true
+      },
+      city: {
+        type: String,
+        required: [true, REQUIRED],
+        trim: true
+      },
+      neighborhood: {
+        type: String,
+        required: [true, REQUIRED],
+        trim: true
+      },
+      street: {
+        type: String,
+        required: [true, REQUIRED],
+        trim: true
+      },
+      number: {
+        type: String,
+        required: [true, REQUIRED],
+        trim: true
+      },
+      complement: {
+        type: String,
+        trim: true
+      }
+    }
+  ],
   isActive: {
     type: Boolean,
     default: true

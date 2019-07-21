@@ -3000,11 +3000,6 @@ mongoose-exists@^0.7.2:
     "@lykmapipo/mongoose-common" ">=0.25.1"
     lodash ">=4.17.11"
 
-mongoose-idexists@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/mongoose-idexists/-/mongoose-idexists-1.0.5.tgz#15f5fd469dc49a6206c984d9c5c68c8c1f89e831"
-  integrity sha1-FfX9Rp3EmmIGyYTZxcaMjB+J6DE=
-
 mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"

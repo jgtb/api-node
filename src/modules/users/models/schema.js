@@ -5,6 +5,8 @@ import uniqueValidator from '../../../support/validations/unique'
 
 import MODEL from './model'
 
+const name = 'users'
+
 const schema = new Schema(MODEL, {
   timestamps: true
 })
@@ -38,6 +40,6 @@ schema.methods.comparePassword = function (candidatePassword) {
   return compareSync(candidatePassword, this.password)
 }
 
-const SCHEMA = model('users', schema, 'users')
+const SCHEMA = model(name, schema, name)
 
 export default SCHEMA
