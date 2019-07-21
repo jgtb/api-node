@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import { Types } from 'mongoose'
 
 import { onSuccess, onError } from '../support/responses'
 import { onGetByIdSuccess, onGetByIdError } from '../support/responses/messages'
@@ -9,7 +9,7 @@ export default (Schema, messageConfig) => async (req, res, next) => {
     const { id } = params
 
     const [ model ] = await Schema.aggregate([
-      { $match: { _id: mongoose.Types.ObjectId(id), ...autoInject } },
+      { $match: { _id: Types.ObjectId(id), ...autoInject } },
       ...pipeline
     ])
 
@@ -18,11 +18,13 @@ export default (Schema, messageConfig) => async (req, res, next) => {
     }
 
     const onSuccessMessage = onGetByIdSuccess(messageConfig)
-    const successResponse = onSuccess(200, onSuccessMessage, model)
+    const successResponse = onSuccess({ status: 200, message: onSuccessMessage, data: model, res })
+
     res.status(200).send(successResponse)
   } catch (err) {
     const onErrorMessage = onGetByIdError(messageConfig)
-    const errorResponse = onError(409, onErrorMessage, err)
+    const errorResponse = onError({ status: 409, message: onErrorMessage, err, res })
+
     res.status(409).send(errorResponse)
   } finally {
     next()

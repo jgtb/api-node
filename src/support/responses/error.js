@@ -1,6 +1,6 @@
 const format = ([ key, { message } ]) => ({ [key]: message })
 
-export default (status, message, err) => {
+export default ({ status, message, err, res }) => {
   console.log(err)
 
   const validators = err.errors || err
@@ -9,9 +9,13 @@ export default (status, message, err) => {
     .entries(validators)
     .map(format)
 
-  return {
+  const response = {
     status,
     message,
     errors
   }
+
+  res.response = response
+
+  return response
 }

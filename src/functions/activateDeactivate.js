@@ -26,12 +26,12 @@ export default (Schema, messageConfig) => async (req, res, next) => {
     await Schema.findOneAndUpdate(finder, update, updateOptions)
 
     const onSuccessMessage = onActivateDeactivateSuccess(messageConfig)
-    const successResponse = onSuccess(200, onSuccessMessage)
+    const successResponse = onSuccess({ status: 200, message: onSuccessMessage, res })
 
     res.status(200).send(successResponse)
   } catch (err) {
     const onErrorMessage = onActivateDeactivateError(messageConfig)
-    const errorResponse = onError(409, onErrorMessage, err)
+    const errorResponse = onError({ status: 409, message: onErrorMessage, err, res })
 
     res.status(409).send(errorResponse)
   } finally {

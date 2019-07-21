@@ -16,6 +16,7 @@ export default {
     paginate: Mixed,
     sort: Mixed
   },
+  response: Mixed,
   apiVersion: String,
   status: String
 }

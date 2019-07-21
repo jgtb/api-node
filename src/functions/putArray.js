@@ -54,12 +54,12 @@ export default (Schema, messageConfig) => (field) => async (req, res, next) => {
     }
 
     const onSuccessMessage = onPatchSuccess(messageConfig)
-    const successResponse = onSuccess(200, onSuccessMessage)
+    const successResponse = onSuccess({ status: 200, message: onSuccessMessage, res })
 
     res.status(200).send(successResponse)
   } catch (err) {
     const onErrorMessage = onPatchError(messageConfig)
-    const errorResponse = onError(409, onErrorMessage, err)
+    const errorResponse = onError({ status: 409, message: onErrorMessage, err, res })
 
     res.status(409).send(errorResponse)
   } finally {
