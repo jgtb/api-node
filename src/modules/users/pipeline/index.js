@@ -1,1 +1,1 @@
-export { default as profilePipeline } from './profile'
+export { default as profile } from './profile'

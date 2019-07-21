@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import functions from '../helpers/functions'
-import { profilePipeline } from '../pipeline'
+import { profile } from '../pipeline'
 import { accept } from '../../../middleware'
 import { autoInject, validateAddresses } from '../middleware'
 
@@ -11,7 +11,7 @@ Routes
   .get(
     '/profile',
     autoInject,
-    profilePipeline,
+    profile,
     functions.getById
   )
   .post(
