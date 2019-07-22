@@ -3,7 +3,7 @@ import { Router } from 'express'
 import functions from '../helpers/functions'
 import { profile } from '../pipeline'
 import { accept } from '../../../middleware'
-import { autoInject, validateAddresses } from '../middleware'
+import { autoInject, validatePassword, validateAddresses } from '../middleware'
 
 const Routes = Router()
 
@@ -23,6 +23,13 @@ Routes
     '/',
     autoInject,
     accept({ instance: 'body', fields: [ 'name', 'phone', 'email' ] }),
+    functions.patch
+  )
+  .patch(
+    '/password',
+    autoInject,
+    accept({ instance: 'body', fields: [ 'currentPassword', 'confirmPassword', 'password' ] }),
+    validatePassword,
     functions.patch
   )
   .put(

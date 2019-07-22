@@ -13,6 +13,7 @@ export default (Schema, messageConfig) => async (req, res, next) => {
       ...autoInject
     }
 
+    console.log('update call')
     const model = await Schema.findOneAndUpdate(finder, body, updateOptions)
 
     if (!model) {
@@ -25,7 +26,7 @@ export default (Schema, messageConfig) => async (req, res, next) => {
     res.status(200).send(successResponse)
   } catch (err) {
     const onErrorMessage = onPatchError(messageConfig)
-    const errorResponse = onError({ status: 409, message: onErrorMessage, err })
+    const errorResponse = onError({ status: 409, message: onErrorMessage, err, res })
 
     res.status(409).send(errorResponse)
   } finally {

@@ -1,5 +1,5 @@
 import { cellPhoneValidator, emailValidator } from '../../../support/validations'
-import { REQUIRED, INVALID, MINLENGTH, MAXLENGTH } from '../../../support/validations/messages'
+import { REQUIRED, INVALID } from '../../../support/validations/messages'
 import { unFormat } from '../../../support/utils'
 
 export default {
@@ -35,9 +35,7 @@ export default {
   password: {
     type: String,
     required: [true, REQUIRED],
-    trim: true,
-    minlength: [6, MINLENGTH(6)],
-    maxlength: [12, MAXLENGTH(12)]
+    trim: true
   },
   addresses: [
     {
@@ -78,6 +76,10 @@ export default {
       }
     }
   ],
+  forgotPassword: {
+    code: String,
+    validUntil: Date
+  },
   isActive: {
     type: Boolean,
     default: true
