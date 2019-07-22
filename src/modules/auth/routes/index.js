@@ -5,6 +5,9 @@ import login from './login'
 const Routes = Router()
 
 Routes
-  .post('/login', login)
+  .post(
+    '/login',
+    login
+  )
 
 export default Routes

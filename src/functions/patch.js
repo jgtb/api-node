@@ -13,7 +13,6 @@ export default (Schema, messageConfig) => async (req, res, next) => {
       ...autoInject
     }
 
-    console.log('update call')
     const model = await Schema.findOneAndUpdate(finder, body, updateOptions)
 
     if (!model) {
