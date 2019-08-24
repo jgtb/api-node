@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose'
 import { compareSync, genSalt, hash } from 'bcryptjs'
 
-import uniqueValidator from '../../../support/validations/unique'
+import { uniqueValidator } from '../../../support/validations'
 
 import MODEL from './model'
 

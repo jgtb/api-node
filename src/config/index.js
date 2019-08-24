@@ -1,8 +1,6 @@
 import local from './local'
 import server from './server'
 
-import unlessPath from './unlessPath'
-
 const configs = {
   local,
   development: server,
@@ -12,8 +10,6 @@ const configs = {
 
 const config = configs[process.env.NODE_ENV]
 
-export {
-  unlessPath
-}
+export { default as unlessPath } from './unlessPath'
 
 export default config

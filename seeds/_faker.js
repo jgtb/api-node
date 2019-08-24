@@ -1,5 +1,1 @@
-import chance from 'chance'
-
-const Chance = chance()
-
-export default Chance
+export { default as Faker } from 'faker'

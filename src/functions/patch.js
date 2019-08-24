@@ -13,7 +13,7 @@ export default (Schema, messageConfig) => async (req, res, next) => {
       ...autoInject
     }
 
-    const model = await Schema.findOneAndUpdate(finder, body, updateOptions)
+    const model = await Schema.update(finder, body, updateOptions)
 
     if (!model) {
       return res.status(401).send(unauthorizedModel)

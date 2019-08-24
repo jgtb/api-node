@@ -1,9 +1,9 @@
 import { Router } from 'express'
 
-import functions from '../helpers/functions'
+import { functions } from '../helpers'
 import { profile } from '../pipeline'
 import { accept } from '../../../middleware'
-import { autoInject, validatePassword, validateAddresses } from '../middleware'
+import { autoInject, forgotPassword, validatePassword } from '../middleware'
 
 const Routes = Router()
 
@@ -26,18 +26,17 @@ Routes
     functions.patch
   )
   .patch(
+    '/forgot-password',
+    accept({ instance: 'body', fields: [ 'email' ] }),
+    forgotPassword,
+    functions.patch
+  )
+  .patch(
     '/password',
     autoInject,
     accept({ instance: 'body', fields: [ 'currentPassword', 'confirmPassword', 'password' ] }),
     validatePassword,
     functions.patch
-  )
-  .put(
-    '/addresses',
-    autoInject,
-    accept({ instance: 'body', fields: [ 'zipcode', 'state', 'city', 'neighborhood', 'street', 'number', 'complement' ] }),
-    validateAddresses,
-    functions.putArray('addresses')
   )
 
 export default Routes
