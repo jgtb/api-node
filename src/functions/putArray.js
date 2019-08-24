@@ -47,7 +47,7 @@ export default (Schema, messageConfig) => (field) => async (req, res, next) => {
 
     const { finder, update } = handler({ id, autoInject, field, body })
 
-    const model = await Schema.update(finder, update, updateOptions)
+    const model = await Schema.findOneAndUpdate(finder, update, updateOptions)
 
     if (!model) {
       return res.status(401).send(unauthorizedModel)

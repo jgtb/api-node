@@ -14,7 +14,7 @@ Routes
     functions.get
   )
   .get(
-    '/paginate',
+    '/paginated',
     partners,
     functions.getWithPaginate
   )
@@ -29,7 +29,7 @@ Routes
     autoInject,
     accept({
       instance: 'body',
-      fields: [ 'name', 'description', 'thumbnail', 'features', 'status' ]
+      fields: [ '_id', 'name', 'description', 'thumbnail', 'features', 'status' ]
     }),
     functions.putArray('cards')
   )

@@ -15,8 +15,6 @@ export default (Schema, messageConfig) => async (req, res, next) => {
       { $sort: { ...sort } }
     ]
 
-    console.log(pipes)
-
     const data = await aggregatePaginate(Schema, pipes, paginate)
 
     if (!data) {

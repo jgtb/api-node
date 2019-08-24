@@ -23,7 +23,7 @@ export default (Schema, messageConfig) => async (req, res, next) => {
     }
 
     const update = { isActive: !model.isActive }
-    await Schema.update(finder, update, updateOptions)
+    await Schema.findOneAndUpdate(finder, update, updateOptions)
 
     const onSuccessMessage = onActivateDeactivateSuccess(messageConfig)
     const successResponse = onSuccess({ status: 200, message: onSuccessMessage, res })

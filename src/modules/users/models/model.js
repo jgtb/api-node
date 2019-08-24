@@ -1,7 +1,14 @@
+import { Types } from 'mongoose'
+
 import { cellPhoneValidator, emailValidator } from '../../../support/validations'
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
 
 export default {
+  partner: {
+    type: Types.ObjectId,
+    ref: 'partners',
+    index: true
+  },
   name: {
     type: String,
     unique: true,
