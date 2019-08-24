@@ -1,4 +1,4 @@
-export default ({ status, message, data = undefined, res }) => {
+export default ({ status, message, data = undefined, res = {} }) => {
   const response = {
     status,
     message,

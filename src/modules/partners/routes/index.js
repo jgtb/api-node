@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
-import functions from '../helpers/functions'
+import { functions } from '../helpers'
+import { partners } from '../pipeline'
 import { accept } from '../../../middleware'
 import { autoInject, validateAddresses } from '../middleware'
 
@@ -9,10 +10,12 @@ const Routes = Router()
 Routes
   .get(
     '/',
+    partners,
     functions.get
   )
   .get(
     '/paginate',
+    partners,
     functions.getWithPaginate
   )
   .patch(
