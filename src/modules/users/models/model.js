@@ -61,7 +61,7 @@ export default {
       },
       status: {
         type: String,
-        enum: [ 'done', 'in progress' ],
+        enum: [ 'used', 'done', 'in progress' ],
         default: 'in progress'
       }
     }

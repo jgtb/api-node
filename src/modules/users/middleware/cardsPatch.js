@@ -24,7 +24,8 @@ export default async (req, res, next) => {
     { $project: {
       _id: false,
       card: '$cards._id',
-      markers: '$cards.markers'
+      markers: '$cards.markers',
+      status: '$cards.status'
     } }
   ])
 
@@ -32,7 +33,11 @@ export default async (req, res, next) => {
     return res.status(401).json({})
   }
 
-  const { markers } = userModel
+  const { markers, status } = userModel
+
+  if (status !== 'in progress') {
+    return res.status(401).json({})
+  }
 
   const marker = markers.find(({ marked }) => !marked)
   const index = markers.findIndex(({ marked }) => !marked)
@@ -44,6 +49,7 @@ export default async (req, res, next) => {
     _id: userModel.card,
     marked,
     unMarked,
+    status: !unMarked ? 'done' : 'in progress',
     [`markers.${index}._id`]: marker._id,
     [`markers.${index}.marked`]: true,
     [`markers.${index}.markedAt`]: new Date()

@@ -3,8 +3,7 @@ export default (req, _, next) => {
     { $project: {
       name: 1,
       phone: 1,
-      email: 1,
-      addresses: 1
+      email: 1
     } }
   ]
 

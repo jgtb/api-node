@@ -8,6 +8,7 @@ import {
   forgotPassword,
   validatePassword,
   cardsPost,
+  cardsPostUse,
   cardsPatch
 } from '../middleware'
 
@@ -30,6 +31,13 @@ Routes
     autoInject,
     accept({ instance: 'body', fields: [ 'card' ] }),
     cardsPost,
+    functions.putArray('cards')
+  )
+  .post(
+    '/cards/use',
+    autoInject,
+    accept({ instance: 'body', fields: [ 'card' ] }),
+    cardsPostUse,
     functions.putArray('cards')
   )
   .patch(
