@@ -14,7 +14,7 @@ export default async (req, res, next) => {
     { $project: {
       _id: false,
       card: '$cards._id',
-      quantity: '$cards.quantity'
+      markers: '$cards.markers'
     } }
   ])
 
@@ -32,7 +32,7 @@ export default async (req, res, next) => {
   }
 
   const markers = Array
-    .from({ length: cardModel.quantity })
+    .from({ length: cardModel.markers })
     .fill({ marked: false, marketAt: null })
 
   req.params.id = id

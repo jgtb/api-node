@@ -1,1 +1,1 @@
-export { default as LocalPassport } from './localPassport'
+export { default as localPassport } from './localPassport'

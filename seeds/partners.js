@@ -5,16 +5,16 @@ export default async (Faker) => {
     .from({ length: 80 })
     .map(_ => ({
       name: Faker.name.findName(),
+      description: Faker.lorem.sentence(),
       phone: '319' + Math.floor(10000000 + Math.random() * 90000000),
       email: Faker.internet.email().toLowerCase(),
-      description: Faker.lorem.sentence(),
       logo: Faker.image.food(),
       cards: Array
         .from({ length: 3 })
         .map(_ => ({
           name: Faker.name.findName(),
           description: Faker.lorem.sentence(),
-          quantity: Faker.random.number({ min: 10, max: 30 }),
+          markers: Faker.random.number({ min: 10, max: 30 }),
           thumbnail: Faker.image.food(),
           features: Array
             .from({ length: 3 })

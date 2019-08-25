@@ -51,7 +51,7 @@ export default {
         type: String,
         required: [true, REQUIRED]
       },
-      quantity: {
+      markers: {
         type: Number,
         default: 1
       },

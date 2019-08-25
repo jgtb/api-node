@@ -1,4 +1,4 @@
-import { LocalPassport } from '../helpers'
+import { localPassport } from '../helpers'
 
 import { generateToken } from '../../../support/token'
 
@@ -10,7 +10,7 @@ const onError = (err, res, next) => {
 }
 
 export default async (req, res, next) => {
-  LocalPassport({ usernameField: 'email' })
+  localPassport({ usernameField: 'email' })
   passport.authenticate('local.user', (err, user) => {
     if (err || !user) {
       onError(err, res, next)
