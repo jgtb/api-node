@@ -5,42 +5,36 @@ import PartnersSchema from '../../partners/models/schema'
 
 export default async (req, res, next) => {
   const { user, body } = req
-  const { id } = user
-  const { card } = body
+  const { partner } = user
+  const { user: client, card } = body
 
-  const [ cardModel ] = await PartnersSchema.aggregate([
-    { $unwind: '$cards' },
-    { $match: { 'cards._id': Types.ObjectId(card), 'cards.status': 'active' } },
-    { $project: {
-      _id: false,
-      card: '$cards._id',
-      markers: '$cards.markers'
-    } }
-  ])
+  const cardModel = await PartnersSchema
+    .findOne({ _id: Types.ObjectId(partner), 'cards._id': Types.ObjectId(card) })
+    .select('_id')
+    .lean()
 
   if (!cardModel) {
     return res.status(401).json({})
   }
 
-  const userModel = await Schema
-    .findOne({ _id: Types.ObjectId(id), 'cards.card': Types.ObjectId(cardModel.card), 'cards.status': 'in progress' })
-    .select('_id')
-    .lean()
+  const [ userModel ] = await Schema.aggregate([
+    { $match: { _id: Types.ObjectId(client) } },
+    { $unwind: '$cards' },
+    { $match: { 'cards.card': Types.ObjectId(card), 'cards.status': 'done' } },
+    { $project: {
+      _id: false,
+      card: '$cards._id'
+    } }
+  ])
 
-  if (userModel) {
+  if (!userModel) {
     return res.status(401).json({})
   }
 
-  const markers = Array
-    .from({ length: cardModel.markers })
-    .fill({ marked: false, marketAt: null })
-
-  req.params.id = id
+  req.params.id = client
   req.body = {
-    card,
-    markers,
-    marked: 0,
-    unMarked: markers.length
+    _id: userModel.card,
+    status: 'used'
   }
 
   next()

@@ -35,8 +35,7 @@ Routes
   )
   .post(
     '/cards/use',
-    autoInject,
-    accept({ instance: 'body', fields: [ 'card' ] }),
+    accept({ instance: 'body', fields: [ 'user', 'card' ] }),
     cardsPostUse,
     functions.putArray('cards')
   )
