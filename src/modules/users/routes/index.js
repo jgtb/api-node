@@ -3,7 +3,13 @@ import { Router } from 'express'
 import { functions } from '../helpers'
 import { profile } from '../pipeline'
 import { accept } from '../../../middleware'
-import { autoInject, forgotPassword, validatePassword } from '../middleware'
+import {
+  autoInject,
+  forgotPassword,
+  validatePassword,
+  cardsPost,
+  cardsPatch
+} from '../middleware'
 
 const Routes = Router()
 
@@ -18,6 +24,19 @@ Routes
     '/',
     accept({ instance: 'body', fields: [ 'name', 'phone', 'email', 'password' ] }),
     functions.post
+  )
+  .post(
+    '/cards',
+    autoInject,
+    accept({ instance: 'body', fields: [ 'card' ] }),
+    cardsPost,
+    functions.putArray('cards')
+  )
+  .patch(
+    '/cards',
+    accept({ instance: 'body', fields: [ 'user', 'card' ] }),
+    cardsPatch,
+    functions.putArray('cards')
   )
   .patch(
     '/',

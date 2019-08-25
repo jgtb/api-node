@@ -38,14 +38,38 @@ export default {
       message: INVALID
     }
   },
+  cards: [
+    {
+      card: {
+        type: Types.ObjectId
+      },
+      markers: [
+        {
+          marked: {
+            type: Boolean
+          },
+          markedAt: {
+            type: Date
+          }
+        }
+      ],
+      marked: {
+        type: Number
+      },
+      unMarked: {
+        type: Number
+      },
+      status: {
+        type: String,
+        enum: [ 'done', 'in progress' ],
+        default: 'in progress'
+      }
+    }
+  ],
   password: {
     type: String,
     required: [true, REQUIRED],
     trim: true
-  },
-  forgotPassword: {
-    code: String,
-    validUntil: Date
   },
   isActive: {
     type: Boolean,

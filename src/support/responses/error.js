@@ -1,6 +1,6 @@
 const format = ([ key, { message } ]) => ({ [key]: message })
 
-export default ({ status, message, err, res }) => {
+export default ({ status, message, err = {}, res = {} }) => {
   console.log(err)
 
   const validators = err.errors || err

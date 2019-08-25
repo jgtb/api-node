@@ -14,6 +14,7 @@ export default async (Faker) => {
         .map(_ => ({
           name: Faker.name.findName(),
           description: Faker.lorem.sentence(),
+          quantity: Faker.random.number({ min: 10, max: 30 }),
           thumbnail: Faker.image.food(),
           features: Array
             .from({ length: 3 })

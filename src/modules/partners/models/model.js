@@ -51,6 +51,10 @@ export default {
         type: String,
         required: [true, REQUIRED]
       },
+      quantity: {
+        type: Number,
+        default: 1
+      },
       thumbnail: {
         type: String,
         required: [true, REQUIRED],

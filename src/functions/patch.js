@@ -15,8 +15,6 @@ export default (Schema, messageConfig) => async (req, res, next) => {
 
     const model = await Schema.findOneAndUpdate(finder, body, updateOptions)
 
-    console.log({ finder, model })
-
     if (!model) {
       return res.status(401).send(unauthorizedModel)
     }
