@@ -1,8 +1,8 @@
 import UsersSchema from '../modules/users/models/schema'
 
-const atLeastOne = (roles) => (permission) => roles.includes(permission)
+const atLeastOne = (roles) => (role) => roles.includes(role)
 
-export default (...permissions) => async (req, res, next) => {
+export default (...roles) => async (req, res, next) => {
   const { id } = req.user
 
   const user = await UsersSchema
@@ -16,7 +16,7 @@ export default (...permissions) => async (req, res, next) => {
 
   const atLeastOneRole = atLeastOne(user.roles)
 
-  const hasPermission = permissions.some(atLeastOneRole)
+  const hasPermission = roles.some(atLeastOneRole)
 
   if (!hasPermission) {
     return res.status(401).json({})

@@ -4,6 +4,11 @@ import { cellPhoneValidator, emailValidator } from '../../../support/validations
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
 
 export default {
+  roles: {
+    type: [String],
+    enum: [ 'master', 'partner', 'user' ],
+    default: [ 'user' ]
+  },
   partner: {
     type: Types.ObjectId,
     ref: 'partners',

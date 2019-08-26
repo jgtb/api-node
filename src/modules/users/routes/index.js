@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import { functions } from '../helpers'
 import { profile } from '../pipeline'
-import { accept } from '../../../middleware'
+import { ACL, accept } from '../../../middleware'
 import {
   autoInject,
   forgotPassword,
@@ -35,12 +35,14 @@ Routes
   )
   .post(
     '/cards/use',
+    ACL('partner'),
     accept({ instance: 'body', fields: [ 'user', 'card' ] }),
     cardsPostUse,
     functions.putArray('cards')
   )
   .patch(
     '/cards',
+    ACL('partner'),
     accept({ instance: 'body', fields: [ 'user', 'card' ] }),
     cardsPatch,
     functions.putArray('cards')
