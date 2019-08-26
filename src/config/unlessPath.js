@@ -4,6 +4,8 @@ export default {
     { url: '/api/v1/users', methods: ['POST'] },
     { url: '/api/v1/users/forgot-password', methods: ['PATCH'] },
     { url: '/api/v1/partners', methods: ['GET'] },
-    { url: '/api/v1/partners/paginated', methods: ['GET'] }
+    { url: '/api/v1/partners/paginated', methods: ['GET'] },
+    { url: /^\/api\/v1\/partners\/.*/, methods: ['GET'] },
+    { url: /^\/api\/v1\/partners\/cards\/.*/, methods: ['GET'] }
   ]
 }

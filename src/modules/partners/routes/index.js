@@ -1,30 +1,47 @@
 import { Router } from 'express'
 
 import { functions } from '../helpers'
-import { partners } from '../pipeline'
+import { partners, cards, cardsDetailed } from '../pipeline'
 import { accept } from '../../../middleware'
 import { autoInject, validateAddresses } from '../middleware'
 
 const Routes = Router()
 
 Routes
-  .get(
+  .get( //  Public Route
     '/',
+    accept({ instance: 'body', fields: [ 'name' ] }),
     partners,
     functions.get
   )
-  .get(
+  .get( //  Public Route
     '/paginated',
+    accept({ instance: 'body', fields: [ 'name' ] }),
     partners,
     functions.getWithPaginate
   )
-  .patch(
+  .get( //  Public Route
+    '/:id',
+    partners,
+    functions.getById
+  )
+  .get( //  Public Route
+    '/cards/:id',
+    cards,
+    functions.getById
+  )
+  .get( //  Public Route
+    '/cards/card/:id',
+    cardsDetailed,
+    functions.getById
+  )
+  .patch( //  Secure Route (Only for who is a partner)
     '/',
     autoInject,
     accept({ instance: 'body', fields: [ 'name', 'description', 'phone', 'email', 'logo' ] }),
     functions.patch
   )
-  .put(
+  .put( //  Secure Route (Only for who is a partner)
     '/cards',
     autoInject,
     accept({
@@ -33,7 +50,7 @@ Routes
     }),
     functions.putArray('cards')
   )
-  .put(
+  .put( //  Secure Route (Only for who is a partner)
     '/addresses',
     autoInject,
     accept({
