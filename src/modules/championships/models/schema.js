@@ -4,7 +4,7 @@ import { uniqueValidator } from '../../../support/validations'
 
 import MODEL from './model'
 
-const name = 'partners'
+const name = 'teams'
 
 const schema = new Schema(MODEL, {
   timestamps: true

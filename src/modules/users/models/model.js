@@ -6,12 +6,12 @@ import { REQUIRED, INVALID } from '../../../support/validations/messages'
 export default {
   roles: {
     type: [String],
-    enum: [ 'master', 'partner', 'user' ],
-    default: [ 'user' ]
+    enum: [ 'master', 'manager', 'seller' ],
+    default: [ 'seller' ]
   },
-  partner: {
+  owner: {
     type: Types.ObjectId,
-    ref: 'partners',
+    ref: 'users',
     index: true
   },
   name: {
@@ -43,31 +43,39 @@ export default {
       message: INVALID
     }
   },
-  cards: [
+  bets: [
     {
-      card: {
+      round: {
         type: Types.ObjectId
       },
-      markers: [
+      games: [
         {
-          marked: {
-            type: Boolean
+          game: {
+            type: Types.ObjectId
           },
-          markedAt: {
-            type: Date
+          winner: {
+            type: Types.ObjectId
+          },
+          status: {
+            type: String,
+            enum: [ 'pending', 'hit', 'mistake' ],
+            default: 'pending'
           }
         }
       ],
-      marked: {
-        type: Number
-      },
-      unMarked: {
-        type: Number
+      mistakes: Number,
+      hits: Number,
+      total: Number,
+      date: Date,
+      paymentStatus: {
+        type: String,
+        enum: [ 'pending', 'paid', 'not paid' ],
+        default: 'pending'
       },
       status: {
         type: String,
-        enum: [ 'used', 'done', 'in progress' ],
-        default: 'in progress'
+        enum: [ 'pending', 'started', 'finished' ],
+        default: 'pending'
       }
     }
   ],

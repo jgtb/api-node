@@ -1,4 +1,4 @@
-import { period, string, boolean } from '../support/filters'
+import { string, period, boolean } from '../support/filters'
 
 const props = {
   name: string('name'),

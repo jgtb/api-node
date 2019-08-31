@@ -2,7 +2,7 @@ import Schema from '../models/schema'
 
 import functions from '../../../functions'
 
-const messageConfig = { single: 'Parceiro', plural: 'Parceiros', type: 'o' }
+const messageConfig = { single: 'Time', plural: 'Times', type: 'o' }
 
 const FUNCTIONS = functions(Schema, messageConfig)
 
