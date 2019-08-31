@@ -2,9 +2,9 @@ import UsersSchema from '../src/modules/users/models/schema'
 
 export default async (Faker) => {
   const data = Array
-    .from({ length: 20 })
+    .from({ length: 200 })
     .map(_ => ({
-      roles: [ 'seller' ],
+      role: 'seller',
       owner: null,
       name: Faker.name.findName(),
       phone: '319' + Math.floor(10000000 + Math.random() * 90000000),
