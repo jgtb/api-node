@@ -46,15 +46,19 @@ export default {
   bets: [
     {
       round: {
-        type: Types.ObjectId
+        type: Types.ObjectId,
+        index: true
       },
       games: [
         {
           game: {
-            type: Types.ObjectId
+            type: Types.ObjectId,
+            index: true
           },
           winner: {
-            type: Types.ObjectId
+            type: Types.ObjectId,
+            ref: 'teams',
+            index: true
           },
           status: {
             type: String,
@@ -67,15 +71,10 @@ export default {
       hits: Number,
       total: Number,
       date: Date,
-      paymentStatus: {
-        type: String,
-        enum: [ 'pending', 'paid', 'not paid' ],
-        default: 'pending'
-      },
       status: {
         type: String,
-        enum: [ 'pending', 'started', 'finished' ],
-        default: 'pending'
+        enum: [ 'not paid', 'paid' ],
+        default: 'not paid'
       }
     }
   ],
