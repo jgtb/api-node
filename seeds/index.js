@@ -5,16 +5,16 @@ import dropDatabase from './_dropDatabase'
 import { Faker } from './_faker'
 
 import users from './users'
-// import championships from './championships'
-import teams from './teams'
+import catalogs from './catalogs'
+import adverts from './adverts'
 
 const seeds = async () => {
   await initDatabase()
   await dropDatabase()
 
-  await teams(Faker)
   await users(Faker)
-  // await championships(Faker)
+  await catalogs(Faker)
+  await adverts(Faker)
 
   process.exit()
 }

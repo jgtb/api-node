@@ -4,21 +4,18 @@ export default {
   name: {
     type: String,
     unique: true,
-    required: [true, REQUIRED],
-    trim: true,
-    index: true
+    required: [true, REQUIRED]
   },
-  initials: {
+  catalog: {
     type: String,
-    unique: true,
-    required: [true, REQUIRED],
-    trim: true,
-    index: true
+    default: null
   },
-  logo: {
-    type: String,
-    trim: true
-  },
+  items: [
+    {
+      name: String,
+      required: [true, REQUIRED]
+    }
+  ],
   isActive: {
     type: Boolean,
     default: true

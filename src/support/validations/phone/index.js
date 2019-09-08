@@ -11,30 +11,33 @@ const codes = [
   96, 97, 98, 99
 ]
 
-const ddd = phone => parseInt(phone.substring(0, 2))
+const ddd = (phone) => parseInt(phone.substring(0, 2))
 
-const isNine = phone => parseInt(phone.substring(2, 3)) === 9
+const isNine = (phone) => parseInt(phone.substring(2, 3)) === 9
 
 const cellPhoneValidators = {
-  hasValidLength: phone => phone.length === 11,
-  hasDigitNine: phone => isNine(phone),
-  hasValidCode: phone => codes.some(code => ddd(phone) === code)
+  hasValidLength: (phone) => phone.length === 11,
+  hasDigitNine: (phone) => isNine(phone),
+  hasValidCode: (phone) => codes.some(code => ddd(phone) === code)
 }
 
 const commercialPhoneValidators = {
-  hasValidLength: phone => phone.length === 10,
-  hasValidCode: phone => codes.some(code => ddd(phone) === code)
+  hasValidLength: (phone) => phone.length === 10,
+  hasValidCode: (phone) => codes.some(code => ddd(phone) === code)
 }
 
-const cellPhoneValidator = phone => Object
+const cellPhoneValidator = (phone) => Object
   .keys(cellPhoneValidators)
   .every(fn => cellPhoneValidators[fn](unFormat(phone)))
 
-const commercialPhoneValidator = phone => Object
+const commercialPhoneValidator = (phone) => Object
   .keys(commercialPhoneValidators)
   .every(fn => commercialPhoneValidators[fn](unFormat(phone)))
 
+const phoneValidator = (phone) => cellPhoneValidator(phone) || commercialPhoneValidator(phone)
+
 export {
+  phoneValidator,
   cellPhoneValidator,
   commercialPhoneValidator
 }

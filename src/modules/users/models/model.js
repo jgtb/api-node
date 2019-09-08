@@ -1,18 +1,13 @@
 import { Types } from 'mongoose'
 
-import { cellPhoneValidator, emailValidator } from '../../../support/validations'
+import { phoneValidator, emailValidator } from '../../../support/validations'
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
 
 export default {
   role: {
     type: String,
-    enum: [ 'master', 'manager', 'seller' ],
-    default: 'seller'
-  },
-  owner: {
-    type: Types.ObjectId,
-    ref: 'users',
-    index: true
+    enum: [ 'master', 'dealer', 'private' ],
+    default: 'private'
   },
   name: {
     type: String,
@@ -21,16 +16,12 @@ export default {
     trim: true,
     index: true
   },
-  phone: {
+  ein: {
     type: String,
     unique: true,
     required: [true, REQUIRED],
     trim: true,
-    index: true,
-    validate: {
-      validator: cellPhoneValidator,
-      message: INVALID
-    }
+    index: true
   },
   email: {
     type: String,
@@ -43,41 +34,49 @@ export default {
       message: INVALID
     }
   },
-  bets: [
+  cellPhone: {
+    type: String,
+    unique: true,
+    required: [true, REQUIRED],
+    trim: true,
+    index: true,
+    validate: {
+      validator: phoneValidator,
+      message: INVALID
+    }
+  },
+  commercialPhone: {
+    type: String,
+    unique: true,
+    required: [true, REQUIRED],
+    trim: true,
+    index: true,
+    validate: {
+      validator: phoneValidator,
+      message: INVALID
+    }
+  },
+  adverts: [
     {
-      round: {
-        type: Types.ObjectId,
-        index: true
-      },
-      games: [
+      name: String,
+      photos: [String],
+      details: [
         {
-          game: {
+          field: {
             type: Types.ObjectId,
-            index: true
+            ref: 'adverts'
           },
-          winner: {
-            type: Types.ObjectId,
-            ref: 'teams',
-            index: true
-          },
-          status: {
-            type: String,
-            enum: [ 'pending', 'hit', 'mistake' ],
-            default: 'pending'
-          }
+          value: Types.mixed
         }
       ],
-      mistakes: Number,
-      hits: Number,
-      total: Number,
-      date: Date,
-      status: {
-        type: String,
-        enum: [ 'not paid', 'paid' ],
-        default: 'not paid'
-      }
+      status: String,
+      isActive: Boolean
     }
   ],
+  forgotPassword: {
+    code: String,
+    expiresIn: Date
+  },
   password: {
     type: String,
     required: [true, REQUIRED],
