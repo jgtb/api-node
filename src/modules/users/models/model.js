@@ -71,18 +71,13 @@ export default {
         required: [true, REQUIRED]
       },
       year: {
-        type: Number,
+        type: String,
         required: [true, REQUIRED]
       },
       modelYear: {
-        type: Number,
+        type: String,
         required: [true, REQUIRED]
       },
-      km: Number,
-      board: String,
-      doors: Number,
-      motor: String,
-      valves: String,
       vehicle: {
         type: Types.ObjectId,
         ref: 'vehicles',
@@ -119,6 +114,11 @@ export default {
         required: [true, REQUIRED],
         exists: [true, INVALID]
       },
+      km: Number,
+      board: String,
+      doors: Number,
+      motor: String,
+      valves: String,
       photos: [String],
       soldOn: Date,
       financed: {

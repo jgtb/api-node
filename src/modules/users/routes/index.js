@@ -24,16 +24,17 @@ Routes
   .post(
     '/',
     autoInject,
-    accept({ instance: 'body', fields: [ 'plain', 'name', 'ein', 'email', 'cellPhone', 'commercialPhone', 'password' ] }),
+    accept({
+      instance: 'body',
+      fields: [ 'plain', 'name', 'ein', 'email', 'cellPhone', 'commercialPhone', 'password' ]
+    }),
     post,
     plain,
     functions.post
   )
   .post(
     '/adverts',
-    accept({ instance: 'body', fields: [ ] }),
-    post,
-    plain,
+    autoInject,
     functions.putArray('adverts')
   )
   .patch(
@@ -45,7 +46,6 @@ Routes
   .patch(
     '/adverts/:id',
     autoInject,
-    accept({ instance: 'body', fields: [ ] }),
     functions.putArray('adverts')
   )
   .patch(
