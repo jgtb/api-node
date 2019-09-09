@@ -23,15 +23,30 @@ Routes
   )
   .post(
     '/',
+    autoInject,
+    accept({ instance: 'body', fields: [ 'plain', 'name', 'ein', 'email', 'cellPhone', 'commercialPhone', 'password' ] }),
     post,
     plain,
     functions.post
   )
+  .post(
+    '/adverts',
+    accept({ instance: 'body', fields: [ ] }),
+    post,
+    plain,
+    functions.putArray('adverts')
+  )
   .patch(
     '/',
     autoInject,
-    accept({ instance: 'body', fields: [ 'name', 'phone', 'email' ] }),
+    accept({ instance: 'body', fields: [ 'name', 'ein', 'email', 'cellPhone', 'commercialPhone' ] }),
     functions.patch
+  )
+  .patch(
+    '/adverts/:id',
+    autoInject,
+    accept({ instance: 'body', fields: [ ] }),
+    functions.putArray('adverts')
   )
   .patch(
     '/forgot-password/send-pin',

@@ -62,45 +62,82 @@ export default {
   },
   adverts: [
     {
-      name: String,
+      title: {
+        type: String,
+        required: [true, REQUIRED]
+      },
+      price: {
+        type: Number,
+        required: [true, REQUIRED]
+      },
+      year: {
+        type: Number,
+        required: [true, REQUIRED]
+      },
+      modelYear: {
+        type: Number,
+        required: [true, REQUIRED]
+      },
       km: Number,
       board: String,
       doors: Number,
-      year: Number,
-      price: Number,
       motor: String,
       valves: String,
-      photos: [String],
-      soldOn: Date,
       vehicle: {
         type: Types.ObjectId,
-        ref: 'vehicles'
+        ref: 'vehicles',
+        required: [true, REQUIRED],
+        exists: [true, INVALID]
       },
       brand: {
         type: Types.ObjectId,
-        ref: 'brands'
+        ref: 'brands',
+        required: [true, REQUIRED],
+        exists: [true, INVALID]
       },
       model: {
         type: Types.ObjectId,
-        ref: 'models'
+        ref: 'models',
+        required: [true, REQUIRED],
+        exists: [true, INVALID]
       },
       version: {
         type: Types.ObjectId,
-        ref: 'versions'
+        ref: 'versions',
+        required: [true, REQUIRED],
+        exists: [true, INVALID]
       },
       fuel: {
         type: Types.ObjectId,
-        ref: 'fuels'
+        ref: 'fuels',
+        required: [true, REQUIRED],
+        exists: [true, INVALID]
       },
       color: {
         type: Types.ObjectId,
-        ref: 'colors'
+        ref: 'colors',
+        required: [true, REQUIRED],
+        exists: [true, INVALID]
       },
+      photos: [String],
+      soldOn: Date,
       financed: {
         type: Boolean,
         default: false
       },
-      status: String
+      acceptExchange: {
+        type: Boolean,
+        default: false
+      },
+      owner: {
+        type: Boolean,
+        default: false
+      },
+      status: {
+        type: String,
+        enum: [ 'avaliable', 'sold', 'inactive' ],
+        default: 'avaliable'
+      }
     }
   ],
   forgotPassword: {
