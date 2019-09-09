@@ -22,8 +22,7 @@ export default async (req, res, next) => {
         return
       }
       const data = {
-        id: user._id,
-        partner: user.partner
+        id: user._id
       }
       const token = await generateToken(data)
       res.status(200).json({ token })

@@ -12,7 +12,7 @@ export default async (Faker) => {
       cellPhone: '319' + Math.floor(10000000 + Math.random() * 90000000),
       commercialPhone: '319' + Math.floor(10000000 + Math.random() * 90000000),
       email: Faker.internet.email().toLowerCase(),
-      adverts: [],
+      fields: [],
       password: '123456',
       isActive: true
     }))

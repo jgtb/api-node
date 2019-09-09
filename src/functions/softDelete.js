@@ -1,8 +1,5 @@
 import { onSuccess, onError } from '../support/responses'
-import {
-  onActivateDeactivateSuccess,
-  onActivateDeactivateError
-} from '../support/responses/messages'
+import { onDeleteSuccess, onDeleteError } from '../support/responses/messages'
 
 import { updateOptions, unauthorizedModel } from './_utils'
 
@@ -16,26 +13,19 @@ export default (Schema, messageConfig) => async (req, res, next) => {
       ...autoInject
     }
 
-    const model = await Schema.findOne(finder)
+    const update = { status: 'deleted' }
+    const model = await Schema.findOneAndUpdate(finder, update, updateOptions)
 
     if (!model) {
-      return res.status(404).send(unauthorizedModel)
+      return res.status(401).send(unauthorizedModel)
     }
 
-    const isActive = !model.isActive
-    const status = model.status === 'active' ? 'inactive' : 'active'
-
-    const update = { isActive, status }
-    await Schema.findOneAndUpdate(finder, update, updateOptions)
-
-    const onSuccessMessage = onActivateDeactivateSuccess(messageConfig)
+    const onSuccessMessage = onDeleteSuccess(messageConfig)
     const successResponse = onSuccess({ status: 200, message: onSuccessMessage, res })
-
-    console.log('xxx')
 
     res.status(200).send(successResponse)
   } catch (err) {
-    const onErrorMessage = onActivateDeactivateError(messageConfig)
+    const onErrorMessage = onDeleteError(messageConfig)
     const errorResponse = onError({ status: 409, message: onErrorMessage, err, res })
 
     res.status(409).send(errorResponse)

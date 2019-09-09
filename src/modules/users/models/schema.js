@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose'
 import { compareSync, genSalt, hash } from 'bcryptjs'
 
-import { uniqueValidator } from '../../../support/validations'
+import { uniqueValidator, existsValidator } from '../../../support/validations'
 
 import MODEL from './model'
 
@@ -12,28 +12,19 @@ const schema = new Schema(MODEL, {
 })
 
 uniqueValidator(schema)
+existsValidator(schema)
 
-schema.pre('save', function (next) {
+schema.pre('save', async function (next) {
   const passwordHasModified = this.isModified('password')
   if (!passwordHasModified) {
     next()
     return
   }
-  const self = this
-  genSalt(10, function (err, salt) {
-    if (err) {
-      next()
-      return
-    }
-    hash(self.password, salt, (err, hash) => {
-      if (err) {
-        next(err)
-        return
-      }
-      self.password = hash
-      next()
-    })
-  })
+  const salt = await genSalt(10)
+  const hashPassword = await hash(this.password, salt)
+
+  this.password = hashPassword
+  next()
 })
 
 schema.methods.comparePassword = function (candidatePassword) {

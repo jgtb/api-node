@@ -2,12 +2,22 @@ import Schema from '../models/schema'
 
 import { genSalt, hash } from 'bcryptjs'
 
+import moment from 'moment'
+
 export default async (req, res, next) => {
   const { code, email, password } = req.body
 
-  const model = await Schema.findOne({ email, 'forgotPassword.code': code })
+  const model = await Schema
+    .findOne({ email, 'forgotPassword.code': code })
+    .select('_id forgotPassword')
 
   if (!model) {
+    return res.status(404).json({})
+  }
+
+  const now = moment()
+
+  if (now.isAfter(model.forgotPassword.expiresIn)) {
     return res.status(404).json({})
   }
 

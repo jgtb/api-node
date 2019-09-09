@@ -4,6 +4,12 @@ import { phoneValidator, emailValidator } from '../../../support/validations'
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
 
 export default {
+  plain: {
+    type: Types.ObjectId,
+    ref: 'plains',
+    required: [true, REQUIRED],
+    exists: [true, INVALID]
+  },
   role: {
     type: String,
     enum: [ 'master', 'dealer', 'private' ],
@@ -48,9 +54,7 @@ export default {
   commercialPhone: {
     type: String,
     unique: true,
-    required: [true, REQUIRED],
     trim: true,
-    index: true,
     validate: {
       validator: phoneValidator,
       message: INVALID
@@ -59,18 +63,44 @@ export default {
   adverts: [
     {
       name: String,
+      km: Number,
+      board: String,
+      doors: Number,
+      year: Number,
+      price: Number,
+      motor: String,
+      valves: String,
       photos: [String],
-      details: [
-        {
-          field: {
-            type: Types.ObjectId,
-            ref: 'adverts'
-          },
-          value: Types.mixed
-        }
-      ],
-      status: String,
-      isActive: Boolean
+      soldOn: Date,
+      vehicle: {
+        type: Types.ObjectId,
+        ref: 'vehicles'
+      },
+      brand: {
+        type: Types.ObjectId,
+        ref: 'brands'
+      },
+      model: {
+        type: Types.ObjectId,
+        ref: 'models'
+      },
+      version: {
+        type: Types.ObjectId,
+        ref: 'versions'
+      },
+      fuel: {
+        type: Types.ObjectId,
+        ref: 'fuels'
+      },
+      color: {
+        type: Types.ObjectId,
+        ref: 'colors'
+      },
+      financed: {
+        type: Boolean,
+        default: false
+      },
+      status: String
     }
   ],
   forgotPassword: {

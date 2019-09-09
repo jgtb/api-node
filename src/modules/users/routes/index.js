@@ -2,10 +2,11 @@ import { Router } from 'express'
 
 import { functions } from '../helpers'
 import { profile } from '../pipeline'
-import { ACL, accept } from '../../../middleware'
+import { accept } from '../../../middleware'
 import {
   autoInject,
-  roles,
+  plain,
+  post,
   forgotPasswordSendPin,
   forgotPassword,
   updatePassword
@@ -21,17 +22,9 @@ Routes
     functions.getById
   )
   .post(
-    '/manager',
-    ACL('master'),
-    roles('manager'),
-    accept({ instance: 'body', fields: [ 'name', 'phone', 'email', 'password' ] }),
-    functions.post
-  )
-  .post(
-    '/seller',
-    ACL('master', 'manager'),
-    roles('seller'),
-    accept({ instance: 'body', fields: [ 'name', 'phone', 'email', 'password' ] }),
+    '/',
+    post,
+    plain,
     functions.post
   )
   .patch(

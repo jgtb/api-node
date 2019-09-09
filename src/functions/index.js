@@ -6,6 +6,7 @@ import insertMany from './insertMany'
 import patch from './patch'
 import putArray from './putArray'
 import _delete from './delete'
+import softDelete from './softDelete'
 import activateDeactivate from './activateDeactivate'
 
 const reducer = (params) => (acc, [ key, value ]) => ({ ...acc, [key]: value(...params) })
@@ -19,6 +20,7 @@ const functions = {
   patch,
   putArray,
   delete: _delete,
+  softDelete,
   activateDeactivate
 }
 
