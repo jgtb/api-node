@@ -5,10 +5,10 @@ export default (...roles) => async (req, res, next) => {
 
   const user = await UsersSchema
     .findById(id)
-    .select('role isActive')
+    .select('role status')
     .lean()
 
-  if (!user || !user.isActive) {
+  if (!user || !user.status !== 'active') {
     return res.status(401).json({})
   }
 

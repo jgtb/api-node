@@ -1,6 +1,6 @@
 export default (req, _, next) => {
   const pipeline = [
-    { $match: { isActive: true } },
+    { $match: { status: 'active' } },
     { $project: {
       role: 1,
       name: 1,

@@ -1,5 +1,6 @@
 export default (req, _, next) => {
   const basePipeline = [
+    { $match: { status: { $ne: 'deleted' } } },
     { $project: {
       __v: false
     } }

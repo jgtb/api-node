@@ -1,9 +1,7 @@
-import { string, period, boolean } from '../support/filters'
+import { string } from '../support/filters'
 
 const props = {
-  name: string('name'),
-  date: period('date'),
-  isActive: boolean('isActive')
+  name: string('name')
 }
 
 const removeUnfoundKey = (props) => ([ key ]) => Object.keys(props).includes(key)

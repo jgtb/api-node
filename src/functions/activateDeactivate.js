@@ -22,16 +22,13 @@ export default (Schema, messageConfig) => async (req, res, next) => {
       return res.status(404).send(unauthorizedModel)
     }
 
-    const isActive = !model.isActive
     const status = model.status === 'active' ? 'inactive' : 'active'
 
-    const update = { isActive, status }
+    const update = { status }
     await Schema.findOneAndUpdate(finder, update, updateOptions)
 
     const onSuccessMessage = onActivateDeactivateSuccess(messageConfig)
     const successResponse = onSuccess({ status: 200, message: onSuccessMessage, res })
-
-    console.log('xxx')
 
     res.status(200).send(successResponse)
   } catch (err) {

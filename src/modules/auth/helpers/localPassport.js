@@ -14,7 +14,7 @@ export default ({ usernameField }) => {
     new passportLocal.Strategy(
       { usernameField },
       async (value, password, done) => {
-        const user = await UsersSchema.findOne({ [usernameField]: value, isActive: true })
+        const user = await UsersSchema.findOne({ [usernameField]: value, status: 'active' })
         if (!user) return done(onError, false)
         if (!user.comparePassword(password)) return done(onError, false)
         return done(null, user)

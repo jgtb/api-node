@@ -14,7 +14,7 @@ export default async (Faker) => {
       email: Faker.internet.email().toLowerCase(),
       fields: [],
       password: '123456',
-      isActive: true
+      status: 'active'
     }))
 
   await UsersSchema.create(data)

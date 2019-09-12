@@ -1,5 +1,7 @@
 import { Types } from 'mongoose'
 
+import { name, status } from '../../../models'
+
 import { phoneValidator, emailValidator } from '../../../support/validations'
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
 
@@ -15,13 +17,7 @@ export default {
     enum: [ 'master', 'dealer', 'private' ],
     default: 'private'
   },
-  name: {
-    type: String,
-    unique: true,
-    required: [true, REQUIRED],
-    trim: true,
-    index: true
-  },
+  name,
   ein: {
     type: String,
     unique: true,
@@ -149,8 +145,5 @@ export default {
     required: [true, REQUIRED],
     trim: true
   },
-  isActive: {
-    type: Boolean,
-    default: true
-  }
+  status
 }
