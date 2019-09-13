@@ -1,8 +1,10 @@
+import { first } from '../src/support/utils'
+
 export default async ({ Schema, size = 1, $match = {} }) => {
   const res = await Schema.aggregate([
     { $match },
     { $sample: { size } }
   ])
 
-  return res
+  return size === 1 ? first(res) : res
 }

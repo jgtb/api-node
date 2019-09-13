@@ -7,7 +7,10 @@ const unFormat = pipe(removeAllSpecialCaracteres, removeAllSpaces)
 
 const randomHash = ({ length = 10 }) => 'x59d0ge1'
 
+const first = (arr) => arr[0]
+
 export {
   unFormat,
-  randomHash
+  randomHash,
+  first
 }

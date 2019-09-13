@@ -1,1 +1,1 @@
-export { VehiclesFunctions, BrandsFunctions, ModelsFunctions, VersionsFunctions } from './functions'
+export { VehiclesFunctions, BrandsFunctions, ModesFunctions, VersionsFunctions } from './functions'

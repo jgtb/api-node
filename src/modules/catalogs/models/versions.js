@@ -8,9 +8,9 @@ import { REQUIRED, INVALID } from '../../../support/validations/messages'
 const collection = 'versions'
 
 const MODEL = {
-  model: {
+  mode: {
     type: Types.ObjectId,
-    ref: 'models',
+    ref: 'modes',
     required: [true, REQUIRED],
     exists: [true, INVALID]
   },

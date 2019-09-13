@@ -5,7 +5,7 @@ import { name, status } from '../../../models'
 import { uniqueValidator, existsValidator } from '../../../support/validations'
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
 
-const collection = 'models'
+const collection = 'modes'
 
 const MODEL = {
   brand: {
