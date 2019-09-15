@@ -1,6 +1,6 @@
 import Schema from '../models/schema'
 
-// import { sendEmail } from '../../../services/email'
+import sendEmail from '../../../services/email'
 import { randomHash } from '../../../support/utils'
 
 import moment from 'moment'
@@ -17,7 +17,7 @@ export default async (req, res, next) => {
     return res.status(401).json({})
   }
 
-  const code = randomHash({ length: 4 })
+  const code = randomHash({ length: 6 })
   const expiresIn = moment().add(4, 'hours').toDate()
 
   const forgotPassword = {
@@ -28,7 +28,11 @@ export default async (req, res, next) => {
   req.params.id = model._id
   req.body = { forgotPassword }
 
-  // await sendEmail({})
+  await sendEmail({
+    to: email,
+    subject: 'Recuperaçao de senha',
+    html: `Pincode: ${code}`
+  })
 
   next()
 }

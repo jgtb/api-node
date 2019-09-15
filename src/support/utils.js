@@ -5,7 +5,7 @@ const removeAllSpaces = replace(/ /g, '')
 
 const unFormat = pipe(removeAllSpecialCaracteres, removeAllSpaces)
 
-const randomHash = ({ length = 10 }) => 'x59d0ge1'
+const randomHash = ({ length = 10 }) => Math.random().toString(36).substr(2, length)
 
 const first = (arr) => arr[0]
 
