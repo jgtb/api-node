@@ -25,7 +25,9 @@ export default async (req, res, next) => {
     expiresIn
   }
 
-  await Schema.findByIdAndUpdate(model._id, { forgotPassword })
+  req.params.id = model._id
+  req.body = { forgotPassword }
+
   // await sendEmail({})
 
   next()

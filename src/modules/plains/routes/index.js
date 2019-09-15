@@ -11,9 +11,9 @@ Routes
   .get('/details/:id', client, functions.getById)
   .get('/admin', admin, functions.get)
   .get('/admin/details/:id', admin, functions.getById)
-  .post('/', ACL('master'), functions.post)
-  .patch('/:id', ACL('master'), functions.patch)
-  .patch('/activateDeactivate/:id', ACL('master'), functions.activateDeactivate)
-  .delete('/:id', ACL('master'), functions.softDelete)
+  .post('/', ACL('admin'), functions.post)
+  .patch('/:id', ACL('admin'), functions.patch)
+  .patch('/activateDeactivate/:id', ACL('admin'), functions.activateDeactivate)
+  .delete('/:id', ACL('admin'), functions.softDelete)
 
 export default Routes

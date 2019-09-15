@@ -8,6 +8,7 @@ import {
   plain,
   post,
   forgotPasswordSendPin,
+  forgotPasswordValidatePin,
   forgotPassword,
   updatePassword
 } from '../middleware'
@@ -55,8 +56,13 @@ Routes
     functions.patch
   )
   .patch(
+    '/forgot-password/validate-pin',
+    accept({ instance: 'body', fields: [ 'email', 'code' ] }),
+    forgotPasswordValidatePin
+  )
+  .patch(
     '/forgot-password',
-    accept({ instance: 'body', fields: [ 'code', 'email', 'password' ] }),
+    accept({ instance: 'body', fields: [ 'email', 'code', 'password' ] }),
     forgotPassword,
     functions.patch
   )

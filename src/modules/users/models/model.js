@@ -14,7 +14,7 @@ export default {
   },
   role: {
     type: String,
-    enum: [ 'master', 'dealer', 'private' ],
+    enum: [ 'admin', 'dealer', 'private' ],
     default: 'private'
   },
   name,
