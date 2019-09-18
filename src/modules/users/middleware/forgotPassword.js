@@ -26,7 +26,7 @@ export default async (req, res, next) => {
   const hashPassword = await hash(password, salt)
 
   req.params.id = model._id
-  req.body = { password: hashPassword }
+  req.body = { password: hashPassword, forgotPassword: { code: null, expiresIn: null } }
 
   next()
 }

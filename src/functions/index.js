@@ -5,6 +5,8 @@ import post from './post'
 import insertMany from './insertMany'
 import patch from './patch'
 import putArray from './putArray'
+import postArray from './postArray'
+import patchArray from './patchArray'
 import _delete from './delete'
 import softDelete from './softDelete'
 import activateDeactivate from './activateDeactivate'
@@ -19,6 +21,8 @@ const functions = {
   insertMany,
   patch,
   putArray,
+  postArray,
+  patchArray,
   delete: _delete,
   softDelete,
   activateDeactivate

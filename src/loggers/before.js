@@ -20,6 +20,11 @@ export default async (req, _, next) => {
   const apiVersion = getApiVersion(originalUrl)
   const endpoint = getEndpoint(originalUrl, module)
 
+  console.log({
+    module,
+    endpoint
+  })
+
   const payload = {
     actor: user.id,
     url: originalUrl,
