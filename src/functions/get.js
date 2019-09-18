@@ -3,7 +3,7 @@ import { onGetSuccess, onGetError } from '../support/responses/messages'
 
 import { notFound } from './_utils'
 
-export default (Schema, messageConfig) => async (req, res, next) => {
+export default (Schema, messageConfig) => ({ successMessage, errorMessage }) => async (req, res, next) => {
   try {
     const { filters, autoInject = {}, pipeline = [], sort } = req
 
@@ -17,12 +17,12 @@ export default (Schema, messageConfig) => async (req, res, next) => {
       return res.status(404).send(notFound)
     }
 
-    const onSuccessMessage = onGetSuccess(messageConfig)
+    const onSuccessMessage = successMessage || onGetSuccess(messageConfig)
     const successResponse = onSuccess({ status: 200, message: onSuccessMessage, data })
 
     res.status(200).send(successResponse)
   } catch (err) {
-    const onErrorMessage = onGetError(messageConfig)
+    const onErrorMessage = errorMessage || onGetError(messageConfig)
     const errorResponse = onError({ status: 409, message: onErrorMessage, err, res })
 
     res.status(409).send(errorResponse)

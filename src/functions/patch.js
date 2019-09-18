@@ -3,7 +3,7 @@ import { onPatchSuccess, onPatchError } from '../support/responses/messages'
 
 import { updateOptions, unauthorizedModel } from './_utils'
 
-export default (Schema, messageConfig) => async (req, res, next) => {
+export default (Schema, messageConfig) => ({ successMessage, errorMessage }) => async (req, res, next) => {
   try {
     const { params, autoInject = {}, body } = req
     const { id } = params
@@ -19,12 +19,12 @@ export default (Schema, messageConfig) => async (req, res, next) => {
       return res.status(401).send(unauthorizedModel)
     }
 
-    const onSuccessMessage = onPatchSuccess(messageConfig)
+    const onSuccessMessage = successMessage || onPatchSuccess(messageConfig)
     const successResponse = onSuccess({ status: 200, message: onSuccessMessage, res })
 
     res.status(200).send(successResponse)
   } catch (err) {
-    const onErrorMessage = onPatchError(messageConfig)
+    const onErrorMessage = errorMessage || onPatchError(messageConfig)
     const errorResponse = onError({ status: 409, message: onErrorMessage, err, res })
 
     res.status(409).send(errorResponse)

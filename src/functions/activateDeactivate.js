@@ -6,7 +6,7 @@ import {
 
 import { updateOptions, unauthorizedModel } from './_utils'
 
-export default (Schema, messageConfig) => async (req, res, next) => {
+export default (Schema, messageConfig) => ({ successMessage, errorMessage }) => async (req, res, next) => {
   try {
     const { params, autoInject = {} } = req
     const { id } = params
@@ -27,12 +27,12 @@ export default (Schema, messageConfig) => async (req, res, next) => {
     const update = { status }
     await Schema.findOneAndUpdate(finder, update, updateOptions)
 
-    const onSuccessMessage = onActivateDeactivateSuccess(messageConfig)
+    const onSuccessMessage = successMessage || onActivateDeactivateSuccess(messageConfig)
     const successResponse = onSuccess({ status: 200, message: onSuccessMessage, res })
 
     res.status(200).send(successResponse)
   } catch (err) {
-    const onErrorMessage = onActivateDeactivateError(messageConfig)
+    const onErrorMessage = errorMessage || onActivateDeactivateError(messageConfig)
     const errorResponse = onError({ status: 409, message: onErrorMessage, err, res })
 
     res.status(409).send(errorResponse)
