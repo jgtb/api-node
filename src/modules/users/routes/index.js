@@ -36,7 +36,7 @@ Routes
   .post(
     '/adverts',
     autoInject,
-    functions.putArray('adverts')
+    functions.postArray('adverts')
   )
   .patch(
     '/',
@@ -47,7 +47,7 @@ Routes
   .patch(
     '/adverts/:id',
     autoInject,
-    functions.putArray('adverts')
+    functions.patchArray('adverts')
   )
   .patch(
     '/forgot-password/send-pin',

@@ -4,7 +4,6 @@ import getById from './getById'
 import post from './post'
 import insertMany from './insertMany'
 import patch from './patch'
-import putArray from './putArray'
 import postArray from './postArray'
 import patchArray from './patchArray'
 import _delete from './delete'
@@ -20,7 +19,6 @@ const functions = {
   post,
   insertMany,
   patch,
-  putArray,
   postArray,
   patchArray,
   delete: _delete,
