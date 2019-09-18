@@ -1,19 +1,19 @@
 import { Router } from 'express'
 
-import { functions } from '../helpers'
+import Functions from '../support/functions'
 import { admin, client } from '../pipeline'
 import { ACL } from '../../../middleware'
 
 const Routes = Router()
 
 Routes
-  .get('/', client, functions.get())
-  .get('/details/:id', client, functions.getById())
-  .get('/admin', admin, functions.get())
-  .get('/admin/details/:id', admin, functions.getById())
-  .post('/', ACL('admin'), functions.post())
-  .patch('/:id', ACL('admin'), functions.patch())
-  .patch('/activateDeactivate/:id', ACL('admin'), functions.activateDeactivate())
-  .delete('/:id', ACL('admin'), functions.softDelete())
+  .get('/', client, Functions.get())
+  .get('/details/:id', client, Functions.getById())
+  .get('/admin', admin, Functions.get())
+  .get('/admin/details/:id', admin, Functions.getById())
+  .post('/', ACL('admin'), Functions.post())
+  .patch('/:id', ACL('admin'), Functions.patch())
+  .patch('/activateDeactivate/:id', ACL('admin'), Functions.activateDeactivate())
+  .delete('/:id', ACL('admin'), Functions.softDelete())
 
 export default Routes

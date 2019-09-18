@@ -58,7 +58,7 @@ Routes
   .patch(
     '/forgot-password/validate-pin',
     accept({ instance: 'body', fields: [ 'email', 'code' ] }),
-    forgotPasswordValidatePin()
+    forgotPasswordValidatePin
   )
   .patch(
     '/forgot-password',

@@ -9,7 +9,8 @@ const mountUpdate = (payload, field) => Object
   .entries(payload)
   .reduce((acc, [ key, value ]) => ({ ...acc, [ mountUpdateKey(field, key) ]: value }), {})
 
-export default (Schema, messageConfig) => (field, { successMessage, errorMessage }) => async (req, res, next) => {
+export default (Schema, messageConfig) => (field, customMessageConfig) => async (req, res, next) => {
+  const responseConfig = customMessageConfig || messageConfig
   try {
     const { params, autoInject = {}, body } = req
     const { id } = params
@@ -30,12 +31,12 @@ export default (Schema, messageConfig) => (field, { successMessage, errorMessage
       return res.status(401).send(unauthorizedModel)
     }
 
-    const onSuccessMessage = successMessage || onPatchSuccess(messageConfig)
+    const onSuccessMessage = onPatchSuccess(responseConfig)
     const successResponse = onSuccess({ status: 200, message: onSuccessMessage, res })
 
     res.status(200).send(successResponse)
   } catch (err) {
-    const onErrorMessage = errorMessage || onPatchError(messageConfig)
+    const onErrorMessage = onPatchError(responseConfig)
     const errorResponse = onError({ status: 409, message: onErrorMessage, err, res })
 
     res.status(409).send(errorResponse)

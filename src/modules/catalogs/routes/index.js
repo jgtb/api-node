@@ -5,7 +5,7 @@ import {
   BrandsFunctions,
   ModesFunctions,
   VersionsFunctions
-} from '../helpers'
+} from '../support/functions'
 import { catalogs } from '../pipeline'
 import { ACL } from '../../../middleware'
 
