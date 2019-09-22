@@ -2,7 +2,7 @@ import PlainsSchema from '../src/modules/plains/models/schema'
 
 export default async (Faker) => {
   const data = Array
-    .from({ length: 6 })
+    .from({ length: 35 })
     .map(_ => ({
       name: Faker.name.findName(),
       price: Faker.random.number({ min: 100, max: 1000 }),

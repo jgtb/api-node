@@ -25,7 +25,7 @@ export default async (Schema, pipeline, { page, limit }) => {
       return null
     }
 
-    return { docs, pages, total }
+    return { docs, page, pages, limit, total }
   } catch (err) {
     throw err
   }

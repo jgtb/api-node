@@ -8,6 +8,7 @@ const Routes = Router()
 
 Routes
   .get('/', client, Functions.get())
+  .get('/paginate', client, Functions.getWithPaginate())
   .get('/details/:id', client, Functions.getById())
   .get('/admin', admin, Functions.get())
   .get('/admin/details/:id', admin, Functions.getById())
