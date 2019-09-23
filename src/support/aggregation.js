@@ -19,6 +19,27 @@ const textSeparateByCommas = ({ input, key }) => ({
   }
 })
 
+const booleanVirtual = ({ key, onTrue = 'Sim', onFalse = 'Não' }) => ({
+  $addFields: {
+    [key]: { $cond: [ { $eq: [ concat('$', key), true ] }, onTrue, onFalse ] }
+  }
+})
+
+const statusVirtual = {
+  $addFields: {
+    status: {
+      $switch: {
+        branches: [
+          { case: { $eq: [ '$status', 'active' ] }, then: 'Ativo' },
+          { case: { $eq: [ '$status', 'inactive' ] }, then: 'Inactive' },
+          { case: { $eq: [ '$status', 'deleted' ] }, then: 'Excluído' }
+        ],
+        default: 'Ativo'
+      }
+    }
+  }
+}
+
 const count = {
   $group: {
     _id: null,
@@ -29,5 +50,7 @@ const count = {
 export {
   formatToDate,
   textSeparateByCommas,
+  booleanVirtual,
+  statusVirtual,
   count
 }

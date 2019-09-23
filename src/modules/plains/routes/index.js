@@ -11,6 +11,7 @@ Routes
   .get('/paginate', client, Functions.getWithPaginate())
   .get('/details/:id', client, Functions.getById())
   .get('/admin', admin, Functions.get())
+  .get('/admin/paginate', admin, Functions.getWithPaginate())
   .get('/admin/details/:id', admin, Functions.getById())
   .post('/', ACL('admin'), Functions.post())
   .patch('/:id', ACL('admin'), Functions.patch())
