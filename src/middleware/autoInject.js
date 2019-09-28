@@ -1,4 +1,4 @@
-const handler = (fields) => Array.isArray(fields)
+const safeProps = (fields) => Array.isArray(fields)
   ? fields
   : [ fields ]
 
@@ -15,7 +15,7 @@ const format = (req) => (acc, { where, to }) => {
 }
 
 export default (fields) => (req, _, next) => {
-  const props = handler(fields)
+  const props = safeProps(fields)
 
   const makeFormat = format(req)
 
