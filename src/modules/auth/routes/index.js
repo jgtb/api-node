@@ -10,12 +10,12 @@ Routes
   .post(
     '/login',
     accept({ instance: 'body', fields: [ 'email', 'password' ] }),
-    login('admin', 'dealer', 'private')
+    login('master', 'dealer', 'private')
   )
   .post(
     '/login/admin',
     accept({ instance: 'body', fields: [ 'email', 'password' ] }),
-    login('admin')
+    login('master')
   )
 
 export default Routes

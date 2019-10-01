@@ -13,9 +13,9 @@ Routes
   .get('/admin', admin, Functions.get())
   .get('/admin/paginate', admin, Functions.getWithPaginate())
   .get('/admin/details/:id', admin, Functions.getById())
-  .post('/', ACL('admin'), Functions.post())
-  .patch('/:id', ACL('admin'), Functions.patch())
-  .patch('/activateDeactivate/:id', ACL('admin'), Functions.activateDeactivate())
-  .delete('/:id', ACL('admin'), Functions.softDelete())
+  .post('/', ACL('master'), Functions.post())
+  .patch('/:id', ACL('master'), Functions.patch())
+  .patch('/activateDeactivate/:id', ACL('master'), Functions.activateDeactivate())
+  .delete('/:id', ACL('master'), Functions.softDelete())
 
 export default Routes

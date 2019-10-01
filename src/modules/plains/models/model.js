@@ -6,7 +6,18 @@ export default {
   name,
   price: {
     type: Number,
+    set: Number,
     required: [true, REQUIRED]
+  },
+  advertsLimit: {
+    type: Number,
+    set: Number,
+    default: 0
+  },
+  advertsPhotosLimit: {
+    type: Number,
+    set: Number,
+    default: 0
   },
   site: {
     type: Boolean,
@@ -19,14 +30,6 @@ export default {
   advertsPriority: {
     type: Boolean,
     default: false
-  },
-  advertsLimit: {
-    type: Number,
-    default: 0
-  },
-  advertsPhotosLimit: {
-    type: Number,
-    default: 0
   },
   advertsVideo: {
     type: Boolean,

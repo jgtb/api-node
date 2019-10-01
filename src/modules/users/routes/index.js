@@ -1,8 +1,8 @@
 import { Router } from 'express'
 
 import Functions, { advertsMessageConfig } from '../support/functions'
-import { profile } from '../pipeline'
-import { accept } from '../../../middleware'
+import { admin, profile } from '../pipeline'
+import { ACL, accept } from '../../../middleware'
 import {
   autoInject,
   plain,
@@ -16,6 +16,23 @@ import {
 const Routes = Router()
 
 Routes
+  .get(
+    '/admin/:role',
+    ACL('master'),
+    admin,
+    Functions.get()
+  )
+  .get(
+    '/admin/paginate/:role',
+    ACL('master'),
+    admin,
+    Functions.getWithPaginate()
+  )
+  .get(
+    '/admin/details/:id',
+    admin,
+    Functions.getById()
+  )
   .get(
     '/profile',
     autoInject,
@@ -34,6 +51,11 @@ Routes
     Functions.post()
   )
   .post(
+    '/admin',
+    ACL('master'),
+    Functions.post()
+  )
+  .post(
     '/adverts',
     autoInject,
     Functions.postArray('adverts', advertsMessageConfig)
@@ -42,6 +64,11 @@ Routes
     '/',
     autoInject,
     accept({ instance: 'body', fields: [ 'name', 'ein', 'email', 'cellPhone', 'commercialPhone' ] }),
+    Functions.patch()
+  )
+  .patch(
+    '/admin/:id',
+    ACL('master'),
     Functions.patch()
   )
   .patch(
@@ -72,6 +99,16 @@ Routes
     accept({ instance: 'body', fields: [ 'currentPassword', 'confirmPassword', 'password' ] }),
     updatePassword,
     Functions.patch()
+  )
+  .patch(
+    '/admin/activateDeactivate/:id',
+    ACL('master'),
+    Functions.activateDeactivate()
+  )
+  .delete(
+    '/admin/:id',
+    ACL('master'),
+    Functions.softDelete()
   )
 
 export default Routes

@@ -8,7 +8,7 @@ export default (...roles) => async (req, res, next) => {
     .select('role status')
     .lean()
 
-  if (!user || !user.status !== 'active') {
+  if (!user || user.status !== 'active') {
     return res.status(401).json({})
   }
 

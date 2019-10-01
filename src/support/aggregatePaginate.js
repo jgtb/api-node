@@ -1,11 +1,13 @@
 import { count } from './aggregation'
 
+const getUnitlLookup = (pipeline) => pipeline.filter(({ $lookup }) => !$lookup)
+
 export default async (Schema, pipeline, { page, limit }) => {
   try {
-    const [ $match, ...pipe ] = pipeline
+    const $matches = getUnitlLookup(pipeline)
 
     const [ res = { count: 0 } ] = await Schema.aggregate([
-      $match,
+      ...$matches,
       { ...count }
     ])
 
@@ -15,10 +17,10 @@ export default async (Schema, pipeline, { page, limit }) => {
     const skip = limit * (page - 1)
 
     const docs = await Schema.aggregate([
-      $match,
+      ...$matches,
       { $skip: skip },
       { $limit: limit },
-      ...pipe
+      ...pipeline
     ])
 
     if (!docs.length) {

@@ -10,7 +10,7 @@ export default async (Faker) => {
 
   const data = []
 
-  await asyncForEach(Array.from({ length: 20 }), async () => {
+  await asyncForEach(Array.from({ length: 500 }), async () => {
     const plainModel = await getRandom({ Schema: PlainsSchema })
 
     data.push({
