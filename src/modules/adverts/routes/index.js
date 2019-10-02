@@ -1,15 +1,15 @@
 import { Router } from 'express'
 
 import Functions from '../support/functions'
-import { admin } from '../pipeline'
+import { adminVirtual, adminBase } from '../pipeline'
 import { ACL } from '../../../middleware'
 
 const Routes = Router()
 
 Routes
-  .get('/admin', ACL('master'), admin, Functions.get())
-  .get('/admin/paginate', ACL('master'), admin, Functions.getWithPaginate())
-  .get('/admin/details/:id', ACL('master'), admin, Functions.getById())
+  .get('/admin', ACL('master'), adminVirtual, Functions.get())
+  .get('/admin/paginate', ACL('master'), adminVirtual, Functions.getWithPaginate())
+  .get('/admin/details/:id', ACL('master'), adminBase, Functions.getById())
   .post('/', ACL('master'), Functions.post())
   .patch('/:id', ACL('master'), Functions.patch())
   .patch('/activateDeactivate/:id', ACL('master'), Functions.activateDeactivate())

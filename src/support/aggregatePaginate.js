@@ -21,8 +21,6 @@ export default async (Schema, pipeline, { page, limit }) => {
   try {
     const $matches = getUntilLookup(pipeline)
 
-    console.log(JSON.stringify($matches))
-
     const [ res = { count: 0 } ] = await Schema.aggregate([
       ...$matches,
       { ...count }

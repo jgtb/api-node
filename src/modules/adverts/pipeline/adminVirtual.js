@@ -1,4 +1,4 @@
-import { lookupVirtual, booleanVirtual, formatToDate } from '../../../support/aggregation'
+import { lookupVirtual, booleanVirtual, formatToDate, statusVirtual } from '../../../support/aggregation'
 
 export default (req, _, next) => {
   const pipeline = [
@@ -9,26 +9,28 @@ export default (req, _, next) => {
     ...lookupVirtual({ from: 'versions', field: 'version' }),
     ...lookupVirtual({ from: 'fuels', field: 'fuel' }),
     ...lookupVirtual({ from: 'colors', field: 'color' }),
-    { ...booleanVirtual({ key: 'owner' }) },
-    { ...booleanVirtual({ key: 'acceptExchange' }) },
-    { ...booleanVirtual({ key: 'financed' }) },
-    { ...formatToDate({ key: 'soldOn' }) },
+    { ...booleanVirtual({ prop: 'owner' }) },
+    { ...booleanVirtual({ prop: 'acceptExchange' }) },
+    { ...booleanVirtual({ prop: 'financed' }) },
+    { ...formatToDate({ prop: 'soldOn' }) },
+    { ...statusVirtual },
     { $project: {
       _id: 1,
+      user: 1,
       title: 1,
       price: 1,
       year: 1,
-      modeYear: 1,
-      km: 1,
-      board: 1,
-      doors: 1,
-      motor: 1,
-      valves: 1,
-      photos: 1,
-      owner: 1,
-      acceptExchange: 1,
+      modelYear: 1,
+      vehicle: 1,
+      brand: 1,
+      mode: 1,
+      version: 1,
+      fuel: 1,
+      color: 1,
       financed: 1,
-      soldOn: 1
+      acceptExchange: 1,
+      owner: 1,
+      status: 1
     }}
   ]
   

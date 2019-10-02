@@ -8,21 +8,21 @@ const lookupVirtual = ({ from, field, prop = 'name' }) => ([
     foreignField: '_id',
     as: field
   }},
-  { $unwind: concat('$', field) },
+  { $unwind: concatMany('$', field) },
   { $addFields: {
-    [concatMany('virtual', '.', prop)]: concatMany('$', field, '.', prop)
+    [field]: concatMany('$', field, '.', prop)
   }}
 ])
 
-const formatToDate = ({ key, format = '%d/%m/%Y', timezone = 'America/Sao_Paulo' }) => ({
+const formatToDate = ({ prop, format = '%d/%m/%Y', timezone = 'America/Sao_Paulo' }) => ({
   $addFields: {
-    [concatMany('virtual', '.', prop)]: { $dateToString: { format, date: concat('$', key), timezone } }
+    [prop]: { $dateToString: { format, date: concat('$', prop), timezone } }
   }
 })
 
 const textSeparateByCommas = ({ prop, input }) => ({
   $addFields: {
-    [concatMany('virtual', '.', prop)]: {
+    [prop]: {
       $trim: {
         input: {
           $reduce: {
@@ -39,17 +39,19 @@ const textSeparateByCommas = ({ prop, input }) => ({
 
 const booleanVirtual = ({ prop, onTrue = 'Sim', onFalse = 'Não' }) => ({
   $addFields: {
-    [concatMany('virtual', '.', prop)]: { $cond: [ { $eq: [ concat('$', prop), true ] }, onTrue, onFalse ] }
+    [prop]: { $cond: [ { $eq: [ concat('$', prop), true ] }, onTrue, onFalse ] }
   }
 })
 
 const statusVirtual = {
   $addFields: {
-    'virtual.status': {
+    status: {
       $switch: {
         branches: [
           { case: { $eq: [ '$status', 'active' ] }, then: 'Ativo' },
           { case: { $eq: [ '$status', 'inactive' ] }, then: 'Inativo' },
+          { case: { $eq: [ '$status', 'avaliable' ] }, then: 'Disponível' },
+          { case: { $eq: [ '$status', 'sold' ] }, then: 'Vendido' },
           { case: { $eq: [ '$status', 'deleted' ] }, then: 'Excluído' }
         ],
         default: 'Ativo'

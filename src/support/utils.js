@@ -1,6 +1,6 @@
 import { reduce, concat, pipe, replace } from 'ramda'
 
-const concatMany = (...strs) => reduce(concat, strs, '')
+const concatMany = (...strs) => strs.reduce(concat, '')
 
 const removeAllSpecialCaracteres = replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi, '')
 const removeAllSpaces = replace(/ /g, '')
