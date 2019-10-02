@@ -13,8 +13,7 @@ export default (req, _, next) => {
       email: 1,
       cellPhone: 1,
       commercialPhone: 1,
-      status: 1,
-      statusDescription: 1
+      status: 1
     } }
   ]
   

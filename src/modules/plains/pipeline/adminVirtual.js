@@ -28,10 +28,10 @@ export default (req, _, next) => {
     { $addFields: {
       users: { $arrayToObject: '$users' }
     }},
-    { ...booleanVirtual({ key: 'site', field: 'siteDescription' }) },
-    { ...booleanVirtual({ key: 'advertsHighlights', field: 'advertsHighlightsDescription' }) },
-    { ...booleanVirtual({ key: 'advertsPriority', field: 'advertsPriorityDescription' }) },
-    { ...booleanVirtual({ key: 'advertsVideo', field: 'advertsVideoDescription' }) },
+    { ...booleanVirtual({ prop: 'site' }) },
+    { ...booleanVirtual({ prop: 'advertsHighlights' }) },
+    { ...booleanVirtual({ prop: 'advertsPriority' }) },
+    { ...booleanVirtual({ prop: 'advertsVideo' }) },
     { ...statusVirtual },
     { $project: {
       _id: 1,
@@ -44,12 +44,7 @@ export default (req, _, next) => {
       advertsPriority: 1,
       advertsVideo: 1,
       status: 1,
-      users: 1,
-      siteDescription: 1,
-      advertsHighlightsDescription: 1,
-      advertsPriorityDescription: 1,
-      advertsVideoDescription: 1,
-      statusDescription: 1
+      users: 1
     }}
   ]
 

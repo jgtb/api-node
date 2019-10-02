@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import Functions from '../support/functions'
-import { admin, profile } from '../pipeline'
+import { adminBase, adminVirtual, profile } from '../pipeline'
 import { ACL, accept } from '../../../middleware'
 import {
   autoInject,
@@ -19,18 +19,18 @@ Routes
   .get(
     '/admin/:role',
     ACL('master'),
-    admin,
+    adminVirtual,
     Functions.get()
   )
   .get(
     '/admin/paginate/:role',
     ACL('master'),
-    admin,
+    adminVirtual,
     Functions.getWithPaginate()
   )
   .get(
     '/admin/details/:id',
-    admin,
+    adminBase,
     Functions.getById()
   )
   .get(

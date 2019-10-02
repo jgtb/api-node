@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import Functions from '../support/functions'
-import { adminVirtual, adminBase } from '../pipeline'
+import { adminBase, adminVirtual } from '../pipeline'
 import { ACL } from '../../../middleware'
 
 const Routes = Router()
