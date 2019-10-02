@@ -82,7 +82,7 @@ export default {
   },
   status: {
     type: String,
-    enum: [ 'avaliable', 'sold', 'inactive' ],
+    enum: [ 'avaliable', 'sold', 'inactive', 'deleted' ],
     default: 'avaliable'
   }
 }

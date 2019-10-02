@@ -39,7 +39,6 @@ export default async (Faker) => {
   })
 
   await asyncForEach(Array.from({ length: 6 }), async () => {
-    console.log('fuels')
     await new FuelsSchema({
       name: Faker.name.findName(),
       status: 'active'
@@ -47,7 +46,6 @@ export default async (Faker) => {
   })
 
   await asyncForEach(Array.from({ length: 6 }), async () => {
-    console.log('colors')
     await new ColorsSchema({
       name: Faker.name.findName(),
       status: 'active'

@@ -1,4 +1,4 @@
-import { concatMany } from '../support/utils'
+import { concatMany } from './utils'
 import { concat } from 'ramda'
 
 const lookupVirtual = ({ from, field, prop = 'name' }) => ([
@@ -10,25 +10,25 @@ const lookupVirtual = ({ from, field, prop = 'name' }) => ([
   }},
   { $unwind: concat('$', field) },
   { $addFields: {
-    [concatMany(field, '.', prop)]: concat('$', field, '.', prop)
-  }},
+    [concatMany('virtual', '.', prop)]: concatMany('$', field, '.', prop)
+  }}
 ])
 
-const formatToDate = ({ key, field = key, format = '%d/%m/%Y', timezone = 'America/Sao_Paulo' }) => ({
+const formatToDate = ({ key, format = '%d/%m/%Y', timezone = 'America/Sao_Paulo' }) => ({
   $addFields: {
-    [field]: { $dateToString: { format, date: concat('$', key), timezone } }
+    [concatMany('virtual', '.', prop)]: { $dateToString: { format, date: concat('$', key), timezone } }
   }
 })
 
-const textSeparateByCommas = ({ key, field = key, input }) => ({
+const textSeparateByCommas = ({ prop, input }) => ({
   $addFields: {
-    [field]: {
+    [concatMany('virtual', '.', prop)]: {
       $trim: {
         input: {
           $reduce: {
             input: concat('$', input),
             initialValue: '',
-            in: { $concat: [ '$$value', ', ', concat('$$this.', key) ] }
+            in: { $concat: [ '$$value', ', ', concat('$$this.', prop) ] }
           }
         },
         chars: ', '
@@ -37,15 +37,15 @@ const textSeparateByCommas = ({ key, field = key, input }) => ({
   }
 })
 
-const booleanVirtual = ({ key, field = key, onTrue = 'Sim', onFalse = 'Não' }) => ({
+const booleanVirtual = ({ prop, onTrue = 'Sim', onFalse = 'Não' }) => ({
   $addFields: {
-    [field]: { $cond: [ { $eq: [ concat('$', key), true ] }, onTrue, onFalse ] }
+    [concatMany('virtual', '.', prop)]: { $cond: [ { $eq: [ concat('$', prop), true ] }, onTrue, onFalse ] }
   }
 })
 
 const statusVirtual = {
   $addFields: {
-    statusDescription: {
+    'virtual.status': {
       $switch: {
         branches: [
           { case: { $eq: [ '$status', 'active' ] }, then: 'Ativo' },

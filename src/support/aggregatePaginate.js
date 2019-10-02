@@ -1,10 +1,27 @@
 import { count } from './aggregation'
 
-const getUnitlLookup = (pipeline) => pipeline.filter(({ $lookup }) => !$lookup)
+const getUntilLookup = (pipeline) => {
+  let stop = false
+
+  const results = []
+
+  pipeline.forEach(pipe => {
+    if (!pipe.$lookup && !stop) {
+      results.push(pipe)
+      return
+    }
+
+    stop = true
+  })
+
+  return results
+}
 
 export default async (Schema, pipeline, { page, limit }) => {
   try {
-    const $matches = getUnitlLookup(pipeline)
+    const $matches = getUntilLookup(pipeline)
+
+    console.log(JSON.stringify($matches))
 
     const [ res = { count: 0 } ] = await Schema.aggregate([
       ...$matches,
