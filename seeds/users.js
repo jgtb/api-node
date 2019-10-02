@@ -10,7 +10,7 @@ export default async (Faker) => {
 
   const data = []
 
-  await asyncForEach(Array.from({ length: 500 }), async () => {
+  await asyncForEach(Array.from({ length: 50 }), async () => {
     const plainModel = await getRandom({ Schema: PlainsSchema })
 
     data.push({
@@ -21,7 +21,6 @@ export default async (Faker) => {
       cellPhone: '319' + Math.floor(10000000 + Math.random() * 90000000),
       commercialPhone: '319' + Math.floor(10000000 + Math.random() * 90000000),
       email: Faker.internet.email().toLowerCase(),
-      adverts: [],
       password: '123456',
       status: 'active'
     })

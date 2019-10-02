@@ -1,4 +1,4 @@
-import { first } from '../src/support/utils'
+import { head } from 'ramda'
 
 export default async ({ Schema, size = 1, $match = {} }) => {
   const res = await Schema.aggregate([
@@ -6,5 +6,5 @@ export default async ({ Schema, size = 1, $match = {} }) => {
     { $sample: { size } }
   ])
 
-  return size === 1 ? first(res) : res
+  return size === 1 ? head(res) : res
 }

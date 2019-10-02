@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import Functions, { advertsMessageConfig } from '../support/functions'
+import Functions from '../support/functions'
 import { admin, profile } from '../pipeline'
 import { ACL, accept } from '../../../middleware'
 import {
@@ -55,11 +55,6 @@ Routes
     ACL('master'),
     Functions.post()
   )
-  .post(
-    '/adverts',
-    autoInject,
-    Functions.postArray('adverts', advertsMessageConfig)
-  )
   .patch(
     '/',
     autoInject,
@@ -70,11 +65,6 @@ Routes
     '/admin/:id',
     ACL('master'),
     Functions.patch()
-  )
-  .patch(
-    '/adverts/:id',
-    autoInject,
-    Functions.patchArray('adverts', advertsMessageConfig)
   )
   .patch(
     '/forgot-password/send-pin',

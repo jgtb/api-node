@@ -1,21 +1,39 @@
+import { concatMany } from '../support/utils'
 import { concat } from 'ramda'
 
-const formatToDate = ({ key, format = '%d/%m/%Y', timezone = 'America/Sao_Paulo' }) => ({
+const lookupVirtual = ({ from, field, prop = 'name' }) => ([
+  { $lookup: {
+    from,
+    localField: field,
+    foreignField: '_id',
+    as: field
+  }},
+  { $unwind: concat('$', field) },
+  { $addFields: {
+    [concatMany(field, '.', prop)]: concat('$', field, '.', prop)
+  }},
+])
+
+const formatToDate = ({ key, field = key, format = '%d/%m/%Y', timezone = 'America/Sao_Paulo' }) => ({
   $addFields: {
-    [key]: { $dateToString: { format, date: concat('$', key), timezone } }
+    [field]: { $dateToString: { format, date: concat('$', key), timezone } }
   }
 })
 
-const textSeparateByCommas = ({ input, key }) => ({
-  $trim: {
-    input: {
-      $reduce: {
-        input: concat('$', input),
-        initialValue: '',
-        in: { $concat: [ '$$value', ', ', concat('$$this.', key) ] }
+const textSeparateByCommas = ({ key, field = key, input }) => ({
+  $addFields: {
+    [field]: {
+      $trim: {
+        input: {
+          $reduce: {
+            input: concat('$', input),
+            initialValue: '',
+            in: { $concat: [ '$$value', ', ', concat('$$this.', key) ] }
+          }
+        },
+        chars: ', '
       }
-    },
-    chars: ', '
+    }
   }
 })
 
@@ -48,6 +66,7 @@ const count = {
 }
 
 export {
+  lookupVirtual,
   formatToDate,
   textSeparateByCommas,
   booleanVirtual,

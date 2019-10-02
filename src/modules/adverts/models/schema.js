@@ -1,15 +1,10 @@
 import { model, Schema } from 'mongoose'
 
-import { name, status } from '../../../models'
-
 import { uniqueValidator } from '../../../support/validations'
 
-const collection = 'colors'
+import MODEL from './model'
 
-const MODEL = {
-  name,
-  status
-}
+const name = 'adverts'
 
 const schema = new Schema(MODEL, {
   timestamps: true
@@ -17,6 +12,6 @@ const schema = new Schema(MODEL, {
 
 uniqueValidator(schema)
 
-const SCHEMA = model(collection, schema, collection)
+const SCHEMA = model(name, schema, name)
 
 export default SCHEMA

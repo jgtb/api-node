@@ -2,7 +2,9 @@ import {
   VehiclesSchema,
   BrandsSchema,
   ModesSchema,
-  VersionsSchema
+  VersionsSchema,
+  FuelsSchema,
+  ColorsSchema
 } from '../src/modules/catalogs/models'
 
 import asyncForEach from '../src/support/asyncForEach'
@@ -34,5 +36,21 @@ export default async (Faker) => {
         })
       })
     })
+  })
+
+  await asyncForEach(Array.from({ length: 6 }), async () => {
+    console.log('fuels')
+    await new FuelsSchema({
+      name: Faker.name.findName(),
+      status: 'active'
+    }).save()
+  })
+
+  await asyncForEach(Array.from({ length: 6 }), async () => {
+    console.log('colors')
+    await new ColorsSchema({
+      name: Faker.name.findName(),
+      status: 'active'
+    }).save()
   })
 }

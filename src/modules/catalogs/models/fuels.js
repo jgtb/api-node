@@ -19,4 +19,4 @@ uniqueValidator(schema)
 
 const SCHEMA = model(collection, schema, collection)
 
-export { MODEL, SCHEMA }
+export default SCHEMA
