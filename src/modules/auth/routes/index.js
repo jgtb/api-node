@@ -10,7 +10,7 @@ Routes
   .post(
     '/login',
     accept({ instance: 'body', fields: [ 'email', 'password' ] }),
-    login('master', 'dealer', 'private')
+    login('master', 'company', 'client')
   )
   .post(
     '/login/admin',

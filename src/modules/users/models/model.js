@@ -16,8 +16,8 @@ export default {
   },
   role: {
     type: String,
-    enum: [ 'master', 'dealer', 'private' ],
-    default: 'private'
+    enum: [ 'master', 'company', 'client' ],
+    default: 'client'
   },
   name,
   ein: {

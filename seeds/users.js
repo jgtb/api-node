@@ -6,7 +6,7 @@ import asyncForEach from '../src/support/asyncForEach'
 import getRandom from './_getRandom'
 
 export default async (Faker) => {
-  const roles = [ 'dealer', 'private' ]
+  const roles = [ 'company', 'client' ]
 
   const data = []
 
