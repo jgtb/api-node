@@ -27,7 +27,7 @@ export default async (Faker) => {
     const colorModel = await getRandom({ Schema: ColorsSchema })
     await new AdvertsSchema({
       user: userModel._id,
-      title: Faker.name.findName(),
+      name: Faker.name.findName(),
       price: Faker.random.number({ min: 100, max: 500 }),
       year: '2019',
       modelYear: '2017',

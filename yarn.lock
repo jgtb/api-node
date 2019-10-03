@@ -981,10 +981,10 @@ braces@^2.3.1, braces@^2.3.2:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
-brazilian-values@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/brazilian-values/-/brazilian-values-0.5.2.tgz#cbcae986c405cd52dd34d17fad16c57e4ca88b1b"
-  integrity sha512-ADYSXR/qOQyZh0m4Wk6MF7LwMFB7DplZgkDtANZdoXL+SkOOB+TN3WBInKvw7C5Gqxj4X/Dif4g62MXQUlve6w==
+brazilian-values@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/brazilian-values/-/brazilian-values-0.6.0.tgz#26da0f20b7051a277832c8a01fe909a81b0c1ded"
+  integrity sha512-LX+RaCL6bYHd5D7yNz0thc6pB3CHIvTOirmBWn5v0Aw7kjqDhsF7RWZXB8uzYQHhHfPUPckAjS6J/Cqa01+9eA==
 
 browserslist@^4.6.0, browserslist@^4.6.2:
   version "4.6.2"

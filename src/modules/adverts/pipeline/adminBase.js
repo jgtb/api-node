@@ -3,7 +3,7 @@ export default (req, _, next) => {
     { $project: {
       _id: 1,
       user: 1,
-      title: 1,
+      name: 1,
       price: 1,
       year: 1,
       modelYear: 1,

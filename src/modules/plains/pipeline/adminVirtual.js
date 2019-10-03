@@ -8,9 +8,9 @@ export default (req, _, next) => {
       pipeline: [
         { $match: { status: { $ne: 'deleted' } } },
         { $match: {
-            $expr: {
-                $eq: [ '$plain', '$$plain' ]
-            }
+          $expr: {
+            $eq: [ '$plain', '$$plain' ]
+          }
         }},
         { $group: {
           _id: '$role',
@@ -18,9 +18,9 @@ export default (req, _, next) => {
           v: { $sum: 1 }
         }},
         { $project: {
-            _id: false,
-            k: 1,
-            v: 1
+          _id: false,
+          k: 1,
+          v: 1
         }}
       ],
       as: 'users'

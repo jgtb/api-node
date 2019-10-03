@@ -2,14 +2,16 @@ import { Types } from 'mongoose'
 
 import { name, status } from '../../../models'
 
-import { phoneValidator, emailValidator } from '../../../support/validations'
+import { emailValidator } from '../../../support/validations'
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
+import validateNotRequired from '../../../support/validations/_validateNotRequired'
+
+import { isPhone } from 'brazilian-values'
 
 export default {
   plain: {
     type: Types.ObjectId,
     ref: 'plains',
-    required: [true, REQUIRED],
     exists: [true, INVALID]
   },
   role: {
@@ -43,99 +45,21 @@ export default {
     trim: true,
     index: true,
     validate: {
-      validator: phoneValidator,
+      validator: isPhone,
       message: INVALID
     }
   },
   commercialPhone: {
     type: String,
     unique: true,
+    sparse: true,
     trim: true,
+    default: null,
     validate: {
-      validator: phoneValidator,
+      validator: validateNotRequired(isPhone),
       message: INVALID
     }
   },
-  adverts: [
-    {
-      title: {
-        type: String,
-        required: [true, REQUIRED]
-      },
-      price: {
-        type: Number,
-        required: [true, REQUIRED]
-      },
-      year: {
-        type: String,
-        required: [true, REQUIRED]
-      },
-      modelYear: {
-        type: String,
-        required: [true, REQUIRED]
-      },
-      vehicle: {
-        type: Types.ObjectId,
-        ref: 'vehicles',
-        required: [true, REQUIRED],
-        exists: [true, INVALID]
-      },
-      brand: {
-        type: Types.ObjectId,
-        ref: 'brands',
-        required: [true, REQUIRED],
-        exists: [true, INVALID]
-      },
-      model: {
-        type: Types.ObjectId,
-        ref: 'models',
-        required: [true, REQUIRED],
-        exists: [true, INVALID]
-      },
-      version: {
-        type: Types.ObjectId,
-        ref: 'versions',
-        required: [true, REQUIRED],
-        exists: [true, INVALID]
-      },
-      fuel: {
-        type: Types.ObjectId,
-        ref: 'fuels',
-        required: [true, REQUIRED],
-        exists: [true, INVALID]
-      },
-      color: {
-        type: Types.ObjectId,
-        ref: 'colors',
-        required: [true, REQUIRED],
-        exists: [true, INVALID]
-      },
-      km: Number,
-      board: String,
-      doors: Number,
-      motor: String,
-      valves: String,
-      photos: [String],
-      soldOn: Date,
-      financed: {
-        type: Boolean,
-        default: false
-      },
-      acceptExchange: {
-        type: Boolean,
-        default: false
-      },
-      owner: {
-        type: Boolean,
-        default: false
-      },
-      status: {
-        type: String,
-        enum: [ 'avaliable', 'sold', 'inactive' ],
-        default: 'avaliable'
-      }
-    }
-  ],
   forgotPassword: {
     code: String,
     expiresIn: Date

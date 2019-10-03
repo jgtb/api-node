@@ -6,7 +6,8 @@
   "scripts": {
     "local": "export NODE_ENV='local' && nodemon --exec babel-node src/index.js",
     "seeds": "export NODE_ENV='local' && babel-node seeds/index.js",
-    "start": "babel-node src/index.js"
+    "start": "babel-node src/index.js",
+    "commit": "git add . && git commit -m 'att'"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +16,7 @@
     "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
-    "brazilian-values": "^0.5.2",
+    "brazilian-values": "^0.6.0",
     "compression": "^1.7.3",
     "cors": "^2.8.4",
     "express": "^4.16.3",
