@@ -12,18 +12,21 @@ export default {
     exists: [true, INVALID]
   },
   name,
+  description: String,
+  doors: {
+    type: Number,
+    required: [true, REQUIRED]
+  },
+  board: {
+    type: Number,
+    required: [true, REQUIRED]
+  },
   price: {
     type: Number,
     required: [true, REQUIRED]
   },
-  year: {
-    type: String,
-    required: [true, REQUIRED]
-  },
-  modelYear: {
-    type: String,
-    required: [true, REQUIRED]
-  },
+  km: String,
+  specification: String,
   vehicle: {
     type: Types.ObjectId,
     ref: 'vehicles',
@@ -48,6 +51,18 @@ export default {
     required: [true, REQUIRED],
     exists: [true, INVALID]
   },
+  category: {
+    type: Types.ObjectId,
+    ref: 'categories',
+    required: [true, REQUIRED],
+    exists: [true, INVALID]
+  },
+  optionals: {
+    type: [Types.ObjectId],
+    ref: 'optionals',
+    required: [true, REQUIRED],
+    exists: [true, INVALID]
+  },
   fuel: {
     type: Types.ObjectId,
     ref: 'fuels',
@@ -60,13 +75,10 @@ export default {
     required: [true, REQUIRED],
     exists: [true, INVALID]
   },
-  km: Number,
-  board: String,
-  doors: Number,
-  motor: String,
-  valves: String,
+  tags: [String],
+  thumbnail: String,
   photos: [String],
-  soldOn: Date,
+  video: String,
   financed: {
     type: Boolean,
     default: false

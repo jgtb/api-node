@@ -3,6 +3,8 @@ import {
   BrandsSchema,
   ModesSchema,
   VersionsSchema,
+  CategoriesSchema,
+  OptionalsSchema,
   FuelsSchema,
   ColorsSchema
 } from '../src/modules/catalogs/models'
@@ -27,6 +29,22 @@ export default async (Faker) => {
           name: Faker.name.findName(),
           status: 'active'
         }).save()
+        if (Faker.random.boolean()) {
+          await asyncForEach(Array.from({ length: 2 }), async () => {
+            const categoryModel = await new CategoriesSchema({
+              vehicle: vehicleModel._id,
+              name: Faker.name.findName(),
+              status: 'active'
+            }).save()
+            await asyncForEach(Array.from({ length: 4 }), async () => {
+              await new OptionalsSchema({
+                category: categoryModel._id,
+                name: Faker.name.findName(),
+                status: 'active'
+              }).save()
+            })
+          })
+        }
         await asyncForEach(Array.from({ length: 6 }), async () => {
           await new VersionsSchema({
             mode: modeModel._id,

@@ -5,6 +5,8 @@ import {
   BrandsFunctions,
   ModesFunctions,
   VersionsFunctions,
+  CategoriesFunctions,
+  OptionalsFunctions,
   FuelsFunctions,
   ColorsFunctions
 } from '../support/functions'
@@ -26,11 +28,11 @@ Routes
   .get('/versions/details/:id', options, VersionsFunctions.getById())
   .get('/categories/:id', options, autoInject('vehicle'), CategoriesFunctions.get())
   .get('/categories/details/:id', options, CategoriesFunctions.getById())
-  .get('/optionais/:id', options, autoInject('category'), OptionaisFunctions.get())
-  .get('/optionais/details/:id', options, OptionaisFunctions.getById())
-  .get('/fuels/:id', options, FuelsFunctions.get())
+  .get('/optionals/:id', options, autoInject('category'), OptionalsFunctions.get())
+  .get('/optionals/details/:id', options, OptionalsFunctions.getById())
+  .get('/fuels', options, FuelsFunctions.get())
   .get('/fuels/details/:id', options, FuelsFunctions.getById())
-  .get('/colors/:id', options, ColorsFunctions.get())
+  .get('/colors', options, ColorsFunctions.get())
   .get('/colors/details/:id', options, ColorsFunctions.getById())
   .post('/vehicles', ACL('master'), VehiclesFunctions.post())
   .post('/brands', ACL('master'), BrandsFunctions.post())

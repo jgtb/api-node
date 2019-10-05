@@ -6,9 +6,9 @@ import {
   ModesSchema,
   VersionsSchema,
   CategoriesSchema,
-  OptionaisSchema,
+  OptionalsSchema,
   FuelsSchema,
-  ColorSchema
+  ColorsSchema
 } from '../models'
 
 const VehiclesFunctions = functions(VehiclesSchema, { single: 'Veículo', plural: 'Veículos', type: 'o' })
@@ -16,9 +16,9 @@ const BrandsFunctions = functions(BrandsSchema, { single: 'Marca', plural: 'Marc
 const ModesFunctions = functions(ModesSchema, { single: 'Modelo', plural: 'Modelos', type: 'o' })
 const VersionsFunctions = functions(VersionsSchema, { single: 'Versão', plural: 'Versões', type: 'o' })
 const CategoriesFunctions = functions(CategoriesSchema, { single: 'Categoria', plural: 'Categorias', type: 'a' })
-const OptionaisFunctions = functions(OptionaisSchema, { single: 'Opcional', plural: 'Opcionais', type: 'o' })
+const OptionalsFunctions = functions(OptionalsSchema, { single: 'Opcional', plural: 'Opcionais', type: 'o' })
 const FuelsFunctions = functions(FuelsSchema, { single: 'Combustível', plural: 'Combustíveis', type: 'o' })
-const ColorsFunctions = functions(ColorSchema, { single: 'Cor', plural: 'Cores', type: 'a' })
+const ColorsFunctions = functions(ColorsSchema, { single: 'Cor', plural: 'Cores', type: 'a' })
 
 export {
   VehiclesFunctions,
@@ -26,7 +26,7 @@ export {
   ModesFunctions,
   VersionsFunctions,
   CategoriesFunctions,
-  OptionaisFunctions,
+  OptionalsFunctions,
   FuelsFunctions,
   ColorsFunctions
 }
