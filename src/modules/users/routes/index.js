@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import Functions from '../support/functions'
-import { adminBase, adminVirtual, profile } from '../pipeline'
+import { adminBase, adminVirtual, adminOptions, profile } from '../pipeline'
 import { ACL, accept } from '../../../middleware'
 import {
   autoInject,
@@ -16,6 +16,12 @@ import {
 const Routes = Router()
 
 Routes
+  .get(
+    '/admin',
+    ACL('master'),
+    adminOptions,
+    Functions.get()
+  )
   .get(
     '/admin/:role',
     ACL('master'),

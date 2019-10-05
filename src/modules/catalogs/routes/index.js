@@ -4,23 +4,34 @@ import {
   VehiclesFunctions,
   BrandsFunctions,
   ModesFunctions,
-  VersionsFunctions
+  VersionsFunctions,
+  FuelsFunctions,
+  ColorsFunctions
 } from '../support/functions'
-import { catalogs } from '../pipeline'
+import { autoInject } from '../middleware'
+import { catalogs, options } from '../pipeline'
 import { ACL } from '../../../middleware'
 
 const Routes = Router()
 
 Routes
   .get('/', catalogs, VehiclesFunctions.getWithPaginate())
-  .get('/vehicles/paginated', VehiclesFunctions.getWithPaginate())
-  .get('/vehicles/details/:id', VehiclesFunctions.getById())
-  .get('/brands/paginated/:id', BrandsFunctions.getWithPaginate())
-  .get('/brands/details/:id', BrandsFunctions.getById())
-  .get('/modes/paginated/:id', ModesFunctions.getWithPaginate())
-  .get('/modes/details/:id', ModesFunctions.getById())
-  .get('/versions/paginated/:id', VersionsFunctions.getWithPaginate())
-  .get('/versions/details/:id', VersionsFunctions.getById())
+  .get('/vehicles', options, VehiclesFunctions.get())
+  .get('/vehicles/details/:id', options, VehiclesFunctions.getById())
+  .get('/brands/:id', options, autoInject('vehicle'), BrandsFunctions.get())
+  .get('/brands/details/:id', options, BrandsFunctions.getById())
+  .get('/modes/:id', options, autoInject('brand'), ModesFunctions.get())
+  .get('/modes/details/:id', options, ModesFunctions.getById())
+  .get('/versions/:id', options, autoInject('mode'), VersionsFunctions.get())
+  .get('/versions/details/:id', options, VersionsFunctions.getById())
+  .get('/categories/:id', options, autoInject('vehicle'), CategoriesFunctions.get())
+  .get('/categories/details/:id', options, CategoriesFunctions.getById())
+  .get('/optionais/:id', options, autoInject('category'), OptionaisFunctions.get())
+  .get('/optionais/details/:id', options, OptionaisFunctions.getById())
+  .get('/fuels/:id', options, FuelsFunctions.get())
+  .get('/fuels/details/:id', options, FuelsFunctions.getById())
+  .get('/colors/:id', options, ColorsFunctions.get())
+  .get('/colors/details/:id', options, ColorsFunctions.getById())
   .post('/vehicles', ACL('master'), VehiclesFunctions.post())
   .post('/brands', ACL('master'), BrandsFunctions.post())
   .post('/modes', ACL('master'), ModesFunctions.post())

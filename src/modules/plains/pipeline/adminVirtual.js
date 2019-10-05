@@ -44,7 +44,8 @@ export default (req, _, next) => {
       advertsPriority: 1,
       advertsVideo: 1,
       status: 1,
-      users: 1
+      clientsQuantity: { $ifNull: [ '$users.client', 0 ] },
+      companiesQuantity: { $ifNull: [ '$users.company', 0 ] }
     }}
   ]
 

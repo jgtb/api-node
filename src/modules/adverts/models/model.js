@@ -71,6 +71,10 @@ export default {
     type: Boolean,
     default: false
   },
+  negotiablePrice: {
+    type: Boolean,
+    default: false
+  },
   acceptExchange: {
     type: Boolean,
     default: false
