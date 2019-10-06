@@ -8,6 +8,7 @@ const start = (app) => (MODULE) => {
   try {
     const Route = require(`${__dirname}/modules/${MODULE}/routes`).default
     const path = `${base}/${MODULE}/`
+    console.log({ path })
     app.use(path, Route, afterLoggers)
   } catch (err) {
     console.log(err)

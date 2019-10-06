@@ -8,14 +8,10 @@ const transport = nodemailer.createTransport({
 })
 
 export default async ({ to, subject, html }) => {
-  try {
-    await transport.sendMail({
-      from: config.mailer.user,
-      to,
-      subject,
-      html
-    })
-  } catch (err) {
-    throw err
-  }
+  await transport.sendMail({
+    from: config.mailer.user,
+    to,
+    subject,
+    html
+  })
 }

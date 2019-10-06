@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 import config from './config'
 
-const options = { useCreateIndex: true, useFindAndModify: false, useNewUrlParser: true }
+const options = { useCreateIndex: true, useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true }
 
 export default async () => {
   try {

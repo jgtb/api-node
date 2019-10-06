@@ -18,7 +18,7 @@ export default {
     required: [true, REQUIRED]
   },
   board: {
-    type: Number,
+    type: String,
     required: [true, REQUIRED]
   },
   price: {
@@ -57,12 +57,14 @@ export default {
     required: [true, REQUIRED],
     exists: [true, INVALID]
   },
-  optionals: {
-    type: [Types.ObjectId],
-    ref: 'optionals',
-    required: [true, REQUIRED],
-    exists: [true, INVALID]
-  },
+  optionals: [
+    {
+      type: Types.ObjectId,
+      ref: 'optionals',
+      required: [true, REQUIRED],
+      exists: [true, INVALID]
+    }
+  ],
   fuel: {
     type: Types.ObjectId,
     ref: 'fuels',

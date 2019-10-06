@@ -21,6 +21,7 @@ export default async (req, _, next) => {
   const endpoint = getEndpoint(originalUrl, module)
 
   console.log({
+    method,
     module,
     endpoint
   })
