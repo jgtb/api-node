@@ -14,6 +14,11 @@ const schema = new Schema(MODEL, {
 uniqueValidator(schema)
 existsValidator(schema)
 
+schema.index(
+  { commercialPhone: 1 },
+  { partialFilterExpression: { commercialPhone: { $type: 'string' } } }
+)
+
 schema.pre('save', async function (next) {
   const passwordHasModified = this.isModified('password')
   if (!passwordHasModified) {

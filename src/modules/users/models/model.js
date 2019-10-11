@@ -4,7 +4,7 @@ import { name, status } from '../../../models'
 
 import { emailValidator } from '../../../support/validations'
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
-import validateNotRequired from '../../../support/validations/_validateNotRequired'
+import { validateNotRequired, setUniqueNotRequired } from '../../../support/validations/_notRequired'
 
 import { isPhone } from 'brazilian-values'
 
@@ -52,9 +52,9 @@ export default {
   commercialPhone: {
     type: String,
     unique: true,
-    sparse: true,
     trim: true,
     default: null,
+    set: setUniqueNotRequired,
     validate: {
       validator: validateNotRequired(isPhone),
       message: INVALID
