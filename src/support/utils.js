@@ -1,4 +1,4 @@
-import { reduce, concat, pipe, replace } from 'ramda'
+import { concat, pipe, replace } from 'ramda'
 
 const concatMany = (...strs) => strs.reduce(concat, '')
 

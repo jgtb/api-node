@@ -14,7 +14,7 @@ const seeds = async () => {
   await dropDatabase()
 
   await plains(Faker)
-  // await catalogs(Faker)
+  await catalogs(Faker)
   await users(Faker)
   // await adverts(Faker)
 

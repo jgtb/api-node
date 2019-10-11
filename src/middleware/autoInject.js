@@ -1,8 +1,4 @@
-const safeProps = (fields) => Array.isArray(fields)
-  ? fields
-  : [ fields ]
-
-const format = (req) => (acc, { where, to }) => {
+const makeFormat = (req) => (acc, { where, to }) => {
   const { instance, key } = where
   const { field, handler = (value) => value } = to
 
@@ -14,12 +10,10 @@ const format = (req) => (acc, { where, to }) => {
   }
 }
 
-export default (fields) => (req, _, next) => {
-  const props = safeProps(fields)
+export default (...props) => (req, _, next) => {
+  const format = makeFormat(req)
 
-  const makeFormat = format(req)
-
-  const autoInject = props.reduce(makeFormat, {})
+  const autoInject = props.reduce(format, {})
 
   req.autoInject = autoInject
 

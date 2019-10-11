@@ -1,6 +1,6 @@
 import { model, Schema, Types } from 'mongoose'
 
-import { name, status } from '../../../models'
+import { status } from '../../../models'
 
 import { uniqueValidator, existsValidator } from '../../../support/validations'
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
@@ -14,13 +14,20 @@ const MODEL = {
     required: [true, REQUIRED],
     exists: [true, INVALID]
   },
-  name,
+  name: {
+    type: String,
+    required: [true, REQUIRED],
+    trim: true,
+    index: true
+  },
   status
 }
 
 const schema = new Schema(MODEL, {
   timestamps: true
 })
+
+schema.index({ brand: 1, name: 1 }, { unique: true })
 
 uniqueValidator(schema)
 existsValidator(schema)
