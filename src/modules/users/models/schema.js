@@ -16,7 +16,7 @@ existsValidator(schema)
 
 schema.index(
   { commercialPhone: 1 },
-  { partialFilterExpression: { commercialPhone: { $type: 'string' } } }
+  { unique: true, partialFilterExpression: { commercialPhone: { $type: 'string' } } }
 )
 
 schema.pre('save', async function (next) {

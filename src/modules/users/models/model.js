@@ -51,7 +51,6 @@ export default {
   },
   commercialPhone: {
     type: String,
-    unique: true,
     trim: true,
     default: null,
     set: setUniqueNotRequired,
