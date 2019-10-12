@@ -1,13 +1,14 @@
 import { Router } from 'express'
 
 import Functions from '../support/functions'
-import {adminBase, adminVirtual, client } from '../pipeline'
+import { adminBase, adminVirtual, client, options } from '../pipeline'
 import { ACL } from '../../../middleware'
 
 const Routes = Router()
 
 Routes
   .get('/', client, Functions.get())
+  .get('/options', options, Functions.get())
   .get('/paginate', client, Functions.getWithPaginate())
   .get('/details/:id', client, Functions.getById())
   .get('/admin', ACL('master'), adminVirtual, Functions.get())

@@ -19,6 +19,7 @@ import getRandom from './_getRandom'
   
 export default async (Faker) => {
   const statues = [ 'avaliable', 'sold', 'inactive' ]
+  
   await asyncForEach(Array.from({ length: 6 }), async () => {
     const userModel = await getRandom({ Schema: UsersSchema })
     const vehicleModel = await getRandom({ Schema: VehiclesSchema })
@@ -35,7 +36,12 @@ export default async (Faker) => {
     await new AdvertsSchema({
       user: userModel._id,
       name: Faker.name.findName(),
+      description: Faker.lorem.sentence(),
+      doors: Faker.random.number({ min: 1, max: 4 }),
+      board: Faker.internet.mac(),
       price: Faker.random.number({ min: 100, max: 500 }),
+      km: Faker.random.number({ min: 300, max: 4000 }),
+      specification: 'auction',
       vehicle: vehicleModel._id,
       brand: brandModel._id,
       mode: modeModel._id,
@@ -44,12 +50,13 @@ export default async (Faker) => {
       optionals,
       fuel: fuelModel._id,
       color: colorModel._id,
-      // km: Faker.random.number({ min: 100, max: 500 }),
-      // board: Faker.name.findName(),
-      // doors: Faker.random.number({ min: 1, max: 4 }),
-      // photos: [],
+      tags: Array.from({ length: 4 }).map(_ => Faker.name.prefix()),
+      thumbnail: Faker.image.transport(),
+      photos: Array.from({ length: 4 }).map(_ => Faker.image.transport()),
+      video: '',
       financed: Faker.random.boolean(),
       acceptExchange: Faker.random.boolean(),
+      negotiablePrice: Faker.random.boolean(),
       owner: Faker.random.boolean(),
       status: statues[ Faker.random.number({ min: 0, max: 2 }) ]
     }).save()

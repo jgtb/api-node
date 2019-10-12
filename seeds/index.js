@@ -16,7 +16,7 @@ const seeds = async () => {
   await plains(Faker)
   await catalogs(Faker)
   await users(Faker)
-  // await adverts(Faker)
+  await adverts(Faker)
 
   process.exit()
 }
