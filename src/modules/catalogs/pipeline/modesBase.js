@@ -1,8 +1,6 @@
-import { statusVirtual } from '../../../support/aggregation'
 
 export default (req, _, next) => {
   const pipeline = [
-    { ...statusVirtual },
     { $lookup: {
       from: 'brands',
       let: { brand: '$brand' },
@@ -12,17 +10,9 @@ export default (req, _, next) => {
             $eq: [ '$_id', '$$brand' ]
           }
         }},
-        { $lookup: {
-          from: 'vehicles',
-          localField: 'vehicle',
-          foreignField: '_id',
-          as: 'vehicle'
-        }},
-        { $unwind: '$vehicle' },
         { $project: {
-          _id: false,
-          name: 1,
-          vehicle: '$vehicle.name'
+          _id: 1,
+          vehicle: 1
         }}
       ],
       as: 'brand'
@@ -31,9 +21,8 @@ export default (req, _, next) => {
     { $project: {
       _id: 1,
       name: 1,
-      brand: '$brand.name',
-      vehicle: '$brand.vehicle',
-      status: 1
+      brand: '$brand._id',
+      vehicle: '$brand.vehicle'
     } }
   ]
   

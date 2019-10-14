@@ -1,10 +1,10 @@
-import { statusVirtual } from '../../../support/aggregation'
 
 export default (req, _, next) => {
   const pipeline = [
-    { ...statusVirtual },
     { $project: {
+      _id: 1,
       name: 1,
+      vehicle: 1,
       status: 1
     }}
   ]

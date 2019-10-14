@@ -14,13 +14,21 @@ import { autoInject } from '../middleware'
 import {
   catalogs,
   vehicles,
+  vehiclesBase,
   brands,
+  brandsBase,
   modes,
+  modesBase,
   versions,
+  versionsBase,
   categories,
+  categoriesBase,
   optionals,
+  optionalsBase,
   fuels,
+  fuelsBase,
   colors,
+  colorsBase,
   options
 } from '../pipeline'
 import { ACL } from '../../../middleware'
@@ -31,28 +39,28 @@ Routes
   .get('/', catalogs, VehiclesFunctions.getWithPaginate())
   .get('/vehicles/paginate', vehicles, VehiclesFunctions.getWithPaginate())
   .get('/vehicles/options', options, VehiclesFunctions.get())
-  .get('/vehicles/details/:id', options, VehiclesFunctions.getById())
+  .get('/vehicles/details/:id', vehiclesBase, VehiclesFunctions.getById())
   .get('/brands/paginate', brands, BrandsFunctions.getWithPaginate())
   .get('/brands/options/:id', options, autoInject('vehicle'), BrandsFunctions.get())
-  .get('/brands/details/:id', options, BrandsFunctions.getById())
+  .get('/brands/details/:id', brandsBase, BrandsFunctions.getById())
   .get('/modes/paginate', modes, ModesFunctions.getWithPaginate())
-  .get('/modes/:id', options, autoInject('brand'), ModesFunctions.get())
-  .get('/modes/options/details/:id', options, ModesFunctions.getById())
+  .get('/modes/options/:id', options, autoInject('brand'), ModesFunctions.get())
+  .get('/modes/details/:id', modesBase, ModesFunctions.getById())
   .get('/versions/paginate', versions, VersionsFunctions.getWithPaginate())
   .get('/versions/options/:id', options, autoInject('mode'), VersionsFunctions.get())
-  .get('/versions/details/:id', options, VersionsFunctions.getById())
+  .get('/versions/details/:id', versionsBase, VersionsFunctions.getById())
   .get('/categories/paginate', categories, CategoriesFunctions.getWithPaginate())
   .get('/categories/options/:id', options, autoInject('vehicle'), CategoriesFunctions.get())
-  .get('/categories/details/:id', options, CategoriesFunctions.getById())
+  .get('/categories/details/:id', categoriesBase, CategoriesFunctions.getById())
   .get('/optionals/paginate', optionals, OptionalsFunctions.getWithPaginate())
   .get('/optionals/options/:id', options, autoInject('category'), OptionalsFunctions.get())
-  .get('/optionals/details/:id', options, OptionalsFunctions.getById())
+  .get('/optionals/details/:id', optionalsBase, OptionalsFunctions.getById())
   .get('/fuels/paginate', fuels, FuelsFunctions.getWithPaginate())
   .get('/fuels/options', options, FuelsFunctions.get())
-  .get('/fuels/details/:id', options, FuelsFunctions.getById())
+  .get('/fuels/details/:id', fuelsBase, FuelsFunctions.getById())
   .get('/colors/paginate', colors, ColorsFunctions.getWithPaginate())
   .get('/colors/options', options, ColorsFunctions.get())
-  .get('/colors/details/:id', options, ColorsFunctions.getById())
+  .get('/colors/details/:id', colorsBase, ColorsFunctions.getById())
   .post('/vehicles', ACL('master'), VehiclesFunctions.post())
   .post('/brands', ACL('master'), BrandsFunctions.post())
   .post('/modes', ACL('master'), ModesFunctions.post())

@@ -15,7 +15,7 @@ export default (req, _, next) => {
       name: 1,
       vehicle: '$vehicle.name',
       status: 1
-    } }
+    }}
   ]
   
   req.setPipeline(pipeline)
