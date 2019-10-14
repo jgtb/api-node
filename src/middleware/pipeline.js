@@ -3,7 +3,7 @@ export default (req, _, next) => {
     { $match: { status: { $ne: 'deleted' } } },
     { $project: {
       __v: false
-    } }
+    }}
   ]
 
   req.pipeline = basePipeline
