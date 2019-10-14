@@ -1,7 +1,5 @@
 import { Types } from 'mongoose'
 
-import { name } from '../../../models'
-
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
 
 export default {
@@ -11,7 +9,13 @@ export default {
     required: [true, REQUIRED],
     exists: [true, INVALID]
   },
-  name,
+  name: {
+    type: String,
+    unique: true,
+    required: [true, REQUIRED],
+    trim: true,
+    index: true
+  },
   description: String,
   doors: {
     type: Number,

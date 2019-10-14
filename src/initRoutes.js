@@ -4,6 +4,8 @@ import { afterLoggers } from './loggers'
 
 const base = '/api/v1'
 
+const ignoreBasicModule = (MODULE) => MODULE !== '_basic'
+
 const start = (app) => (MODULE) => {
   try {
     const Route = require(`${__dirname}/modules/${MODULE}/routes`).default
@@ -19,7 +21,9 @@ export default (app) => {
   const makeStart = start(app)
 
   const modules = fs.readdirSync(`${__dirname}/modules`)
-  modules.forEach(makeStart)
+  modules
+    .filter(ignoreBasicModule)
+    .forEach(makeStart)
 
   app.use(({ originalUrl }, res, next) => {
     res.status(500).json({

@@ -1,7 +1,5 @@
 import { Types } from 'mongoose'
 
-import { name, status } from '../../../models'
-
 import { emailValidator } from '../../../support/validations'
 import { REQUIRED, INVALID } from '../../../support/validations/messages'
 import { validateNotRequired, setUniqueNotRequired } from '../../../support/validations/_notRequired'
@@ -19,7 +17,13 @@ export default {
     enum: [ 'master', 'company', 'client' ],
     default: 'client'
   },
-  name,
+  name: {
+    type: String,
+    unique: true,
+    required: [true, REQUIRED],
+    trim: true,
+    index: true
+  },
   ein: {
     type: String,
     unique: true,
@@ -68,5 +72,9 @@ export default {
     required: [true, REQUIRED],
     trim: true
   },
-  status
+  status: {
+    type: String,
+    enum: ['active', 'inactive', 'deleted'],
+    default: 'active'
+  }
 }

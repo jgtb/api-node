@@ -1,9 +1,13 @@
-import { name, status } from '../../../models'
-
 import { REQUIRED } from '../../../support/validations/messages'
 
 export default {
-  name,
+  name: {
+    type: String,
+    unique: true,
+    required: [true, REQUIRED],
+    trim: true,
+    index: true
+  },
   price: {
     type: Number,
     set: Number,
@@ -39,5 +43,9 @@ export default {
     type: Boolean,
     default: false
   },
-  status
+  status: {
+    type: String,
+    enum: ['active', 'inactive', 'deleted'],
+    default: 'active'
+  }
 }
