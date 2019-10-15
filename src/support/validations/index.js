@@ -1,4 +1,3 @@
-export { phoneValidator, cellPhoneValidator, commercialPhoneValidator } from './phone'
 export { default as emailValidator } from './email'
 export { default as atLeastValidator } from './atLeast'
 export { default as uniqueValidator } from './unique'
