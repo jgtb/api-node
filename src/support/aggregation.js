@@ -50,9 +50,7 @@ const statusVirtual = {
         branches: [
           { case: { $eq: [ '$status', 'active' ] }, then: 'Ativo' },
           { case: { $eq: [ '$status', 'inactive' ] }, then: 'Inativo' },
-          { case: { $eq: [ '$status', 'avaliable' ] }, then: 'Disponível' },
-          { case: { $eq: [ '$status', 'sold' ] }, then: 'Vendido' },
-          { case: { $eq: [ '$status', 'deleted' ] }, then: 'Excluído' }
+          { case: { $eq: [ '$status', 'avaliable' ] }, then: 'Disponível' }
         ],
         default: 'Ativo'
       }
