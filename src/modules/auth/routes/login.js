@@ -9,8 +9,8 @@ const onError = (err, res, next) => {
   next()
 }
 
-export default (...roles) => async (req, res, next) => {
-  localPassport({ usernameField: 'email', roles })
+export default async (req, res, next) => {
+  localPassport({ usernameField: 'email' })
   passport.authenticate('local.user', (err, user) => {
     if (err || !user) {
       onError(err, res, next)

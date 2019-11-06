@@ -1,12 +1,8 @@
 import { Router } from 'express'
 
 import Functions from '../support/functions'
-import { adminBase, adminVirtual, adminOptions, profile } from '../pipeline'
-import { ACL, accept } from '../../../middleware'
 import {
   autoInject,
-  plain,
-  post,
   forgotPasswordSendPin,
   forgotPasswordValidatePin,
   forgotPassword,
@@ -17,26 +13,15 @@ const Routes = Router()
 
 Routes
   .get(
-    '/admin',
-    ACL('master'),
-    adminOptions,
+    '/',
     Functions.get()
   )
   .get(
-    '/admin/:role',
-    ACL('master'),
-    adminVirtual,
-    Functions.get()
-  )
-  .get(
-    '/admin/paginate/:role',
-    ACL('master'),
-    adminVirtual,
+    '/paginate',
     Functions.getWithPaginate()
   )
   .get(
-    '/admin/details/:id',
-    adminBase,
+    '/details/:id',
     Functions.getById()
   )
   .get(
@@ -47,29 +32,16 @@ Routes
   )
   .post(
     '/',
-    autoInject,
     accept({
       instance: 'body',
-      fields: [ 'plain', 'name', 'ein', 'email', 'cellPhone', 'commercialPhone', 'password' ]
+      fields: [ 'name', 'email', 'password' ]
     }),
-    post,
-    plain,
-    Functions.post()
-  )
-  .post(
-    '/admin',
-    ACL('master'),
     Functions.post()
   )
   .patch(
     '/',
     autoInject,
-    accept({ instance: 'body', fields: [ 'name', 'ein', 'email', 'cellPhone', 'commercialPhone' ] }),
-    Functions.patch()
-  )
-  .patch(
-    '/admin/:id',
-    ACL('master'),
+    accept({ instance: 'body', fields: [ 'name', 'email' ] }),
     Functions.patch()
   )
   .patch(
@@ -96,14 +68,8 @@ Routes
     updatePassword,
     Functions.patch()
   )
-  .patch(
-    '/admin/activateDeactivate/:id',
-    ACL('master'),
-    Functions.activateDeactivate()
-  )
   .delete(
-    '/admin/:id',
-    ACL('master'),
+    '/:id',
     Functions.softDelete()
   )
 

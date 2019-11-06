@@ -1,25 +1,13 @@
 import UsersSchema from '../src/modules/users/models/schema'
-import PlainsSchema from '../src/modules/plains/models/schema'
 
 import asyncForEach from '../src/support/asyncForEach'
 
-import getRandom from './_getRandom'
-
 export default async (Faker) => {
-  const roles = [ 'master', 'company', 'client' ]
-
   const data = []
 
   await asyncForEach(Array.from({ length: 150 }), async () => {
-    const plainModel = await getRandom({ Schema: PlainsSchema })
-
     data.push({
-      plain: plainModel._id,
-      role: roles[ Faker.random.number({ min: 0, max: 2 }) ],
       name: Faker.name.findName(),
-      ein: Faker.random.number({ min: 100000000, max: 200000000 }),
-      cellPhone: '319' + Math.floor(10000000 + Math.random() * 90000000),
-      commercialPhone: '319' + Math.floor(10000000 + Math.random() * 90000000),
       email: Faker.internet.email().toLowerCase(),
       password: '123456',
       status: 'active'
