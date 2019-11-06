@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import Functions from '../support/functions'
+import { accept } from '../../../middleware'
 import {
   autoInject,
   forgotPasswordSendPin,
@@ -8,20 +9,24 @@ import {
   forgotPassword,
   updatePassword
 } from '../middleware'
+import { profile, base } from '../pipeline'
 
 const Routes = Router()
 
 Routes
   .get(
     '/',
+    base,
     Functions.get()
   )
   .get(
     '/paginate',
+    base,
     Functions.getWithPaginate()
   )
   .get(
     '/details/:id',
+    base,
     Functions.getById()
   )
   .get(
