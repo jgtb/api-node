@@ -14,7 +14,7 @@ export default async (req, res, next) => {
     .lean()
 
   if (!model) {
-    return res.status(401).json({})
+    return res.status(403).json({ message: 'Email não encontrado' })
   }
 
   const code = randomHash({ length: 6 })
@@ -28,11 +28,13 @@ export default async (req, res, next) => {
   req.params.id = model._id
   req.body = { forgotPassword }
 
-  await sendEmail({
+  sendEmail({
     to: email,
     subject: 'Recuperaçao de senha',
-    html: `Pincode: ${code}`
+    html: `Code: ${code}`
   })
+
+  req.customMessage = 'Enviamos um código de redefinição para o seu email'
 
   next()
 }

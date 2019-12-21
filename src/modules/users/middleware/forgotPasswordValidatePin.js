@@ -11,16 +11,16 @@ export default async (req, res, next) => {
     .lean()
 
   if (!model) {
-    return res.status(404).json({})
+    return res.status(403).json({ message: 'Código inválido' })
   }
 
   const now = moment()
 
   if (now.isAfter(model.forgotPassword.expiresIn)) {
-    return res.status(404).json({})
+    return res.status(403).json({ message: 'Código expirado' })
   }
 
-  res.status(200).json({})
+  res.status(200).json({ message: 'Código válido' })
 
   next()
 }

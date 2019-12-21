@@ -13,13 +13,13 @@ export default async (req, res, next) => {
     .lean()
 
   if (!model) {
-    return res.status(404).json({})
+    return res.status(403).json({ message: 'Código inválido' })
   }
 
   const now = moment()
 
   if (now.isAfter(model.forgotPassword.expiresIn)) {
-    return res.status(404).json({})
+    return res.status(403).json({ message: 'Código expirado' })
   }
 
   const salt = await genSalt(10)
@@ -27,6 +27,8 @@ export default async (req, res, next) => {
 
   req.params.id = model._id
   req.body = { password: hashPassword, forgotPassword: { code: null, expiresIn: null } }
+
+  req.customMessage = 'Senha alterada com sucesso'
 
   next()
 }

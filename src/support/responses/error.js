@@ -1,6 +1,11 @@
-const format = ([ key, { message } ]) => ({ [key]: message })
+import propsDescriptions from '../../support/propsDescriptions' 
+import { concatMany } from '../../support/utils'
 
-export default ({ status, message, err = {}, res = {} }) => {
+const buildDescription = (key, message) => propsDescriptions[key] && concatMany(propsDescriptions[key], ': ', message)
+
+const format = ([ key, { message } ]) => ({ name: key, error: message, description: buildDescription(key, message) })
+
+export default ({ status, message, err = {}, req = {}, res = {} }) => {
   console.log(err)
 
   const validators = err.errors || err
@@ -11,8 +16,9 @@ export default ({ status, message, err = {}, res = {} }) => {
 
   const response = {
     status,
-    message,
-    errors
+    message: req.customMessage ||  message,
+    errors,
+    errorsDescription
   }
 
   res.response = response

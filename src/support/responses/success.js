@@ -1,7 +1,7 @@
-export default ({ status, message, data = undefined, res = {} }) => {
+export default ({ status, message, data = undefined, req = {}, res = {} }) => {
   const response = {
     status,
-    message,
+    message: req.customMessage || message,
     data
   }
 
