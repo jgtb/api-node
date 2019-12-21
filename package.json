@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "local": "export NODE_ENV='local' && nodemon --exec babel-node src/index.js",
-    "seeds": "export NODE_ENV='local' && babel-node seeds/index.js",
+    "seeds": "export NODE_ENV='local' && babel-node database/seeds/index.js",
     "start": "babel-node src/index.js",
     "commit": "git add . && git commit -m 'att'"
   },
