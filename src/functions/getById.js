@@ -3,7 +3,7 @@ import { Types } from 'mongoose'
 import { onSuccess, onError } from '../support/responses'
 import { onGetByIdSuccess, onGetByIdError } from '../support/responses/messages'
 
-export default (Schema, messageConfig) => (customMessageConfig) => async (req, res, next) => {
+export default (Schema, messageConfig) => ({ customMessageConfig, customSuccessMessage, customErrorMessage }) => async (req, res, next) => {
   const responseConfig = customMessageConfig || messageConfig
   try {
     const { autoInject = {}, params, pipeline = [] } = req
@@ -19,13 +19,13 @@ export default (Schema, messageConfig) => (customMessageConfig) => async (req, r
     }
 
     const onSuccessMessage = onGetByIdSuccess(responseConfig)
-    const successResponse = onSuccess({ status: 200, message: onSuccessMessage, data: model, req, res })
+    const successResponse = onSuccess({ status: 200, message: onSuccessMessage, customSuccessMessage, data: model, res })
 
     res.status(200).send(successResponse)
   } catch (err) {
     const onErrorMessage = onGetByIdError(responseConfig)
-    const errorResponse = onError({ status: 409, message: onErrorMessage, err, req, res })
-
+    const errorResponse = onError({ status: 409, message: onErrorMessage, customErrorMessage, err, res })
+    
     res.status(409).send(errorResponse)
   } finally {
     next()

@@ -9,26 +9,11 @@ import {
   forgotPassword,
   updatePassword
 } from '../middleware'
-import { profile, base } from '../pipeline'
+import { profile } from '../pipeline'
 
 const Routes = Router()
 
 Routes
-  .get(
-    '/',
-    base,
-    Functions.get()
-  )
-  .get(
-    '/paginate',
-    base,
-    Functions.getWithPaginate()
-  )
-  .get(
-    '/details/:id',
-    base,
-    Functions.getById()
-  )
   .get(
     '/profile',
     autoInject,
@@ -41,13 +26,13 @@ Routes
       instance: 'body',
       fields: [ 'name', 'email', 'password' ]
     }),
-    Functions.post()
+    Functions.post({ customSuccessMessage: 'Cadastro realizado com sucesso' })
   )
   .patch(
     '/',
     autoInject,
     accept({ instance: 'body', fields: [ 'name', 'email' ] }),
-    Functions.patch()
+    Functions.patch({ customSuccessMessage: 'Dados atualizados com sucesso' })
   )
   .patch(
     '/forgot-password/send-pin',
@@ -72,10 +57,6 @@ Routes
     accept({ instance: 'body', fields: [ 'currentPassword', 'confirmPassword', 'password' ] }),
     updatePassword,
     Functions.patch()
-  )
-  .delete(
-    '/:id',
-    Functions.softDelete()
   )
 
 export default Routes

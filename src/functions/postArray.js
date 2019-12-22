@@ -25,13 +25,13 @@ export default (Schema, messageConfig) => (field, customMessageConfig) => async 
     }
 
     const onSuccessMessage = onPostSuccess(responseConfig)
-    const successResponse = onSuccess({ status: 200, message: onSuccessMessage, req, res })
+    const successResponse = onSuccess({ status: 200, message: onSuccessMessage, customSuccessMessage, res })
 
     res.status(200).send(successResponse)
   } catch (err) {
     const onErrorMessage = onPostError(responseConfig)
-    const errorResponse = onError({ status: 409, message: onErrorMessage, err, req, res })
-
+    const errorResponse = onError({ status: 409, message: onErrorMessage, customErrorMessage, err, res })
+    
     res.status(409).send(errorResponse)
   } finally {
     next()

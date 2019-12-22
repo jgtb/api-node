@@ -34,7 +34,5 @@ export default async (req, res, next) => {
     html: `Code: ${code}`
   })
 
-  req.customMessage = 'Enviamos um código de redefinição para o seu email'
-
   next()
 }

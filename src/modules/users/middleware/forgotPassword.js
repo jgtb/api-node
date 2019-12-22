@@ -28,7 +28,5 @@ export default async (req, res, next) => {
   req.params.id = model._id
   req.body = { password: hashPassword, forgotPassword: { code: null, expiresIn: null } }
 
-  req.customMessage = 'Senha alterada com sucesso'
-
   next()
 }

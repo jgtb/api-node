@@ -5,7 +5,7 @@ const buildDescription = (key, message) => propsDescriptions[key] && concatMany(
 
 const format = ([ key, { message } ]) => ({ name: key, error: message, description: buildDescription(key, message) })
 
-export default ({ status, message, err = {}, req = {}, res = {} }) => {
+export default ({ status, message, customErrorMessage, err = {}, res = {} }) => {
   console.log(err)
 
   const validators = err.errors || err
@@ -16,7 +16,7 @@ export default ({ status, message, err = {}, req = {}, res = {} }) => {
 
   const response = {
     status,
-    message: req.customMessage ||  message,
+    message: customErrorMessage || message,
     errors
   }
 
