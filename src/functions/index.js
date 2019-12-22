@@ -1,3 +1,4 @@
+import login from './login'
 import get from './get'
 import getWithPaginate from './getWithPaginate'
 import getById from './getById'
@@ -13,6 +14,7 @@ import activateDeactivate from './activateDeactivate'
 const reducer = (params) => (acc, [ key, value ]) => ({ ...acc, [key]: value(...params) })
 
 const functions = {
+  login,
   get,
   getWithPaginate,
   getById,

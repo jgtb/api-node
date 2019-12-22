@@ -21,6 +21,10 @@ Routes
     Functions.getById()
   )
   .post(
+    '/login',
+    Functions.login()
+  )
+  .post(
     '/',
     accept({
       instance: 'body',
