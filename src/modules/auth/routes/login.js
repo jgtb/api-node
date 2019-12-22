@@ -1,32 +1,33 @@
-import { localPassport } from '../helpers'
+import UsersSchema from '../../users/models/schema'
 
 import { generateToken } from '../../../support/token'
 
-import passport from 'passport'
+const onError = { status: 401, message: 'Dados de acesso inválidos. Tente novamente.' }
 
-const onError = (err, res, next) => {
-  res.status(401).json(err)
-  next()
-}
+export default async (req, res) => {
+  const { email, password } = req.body
+  try {
+    const model = await UsersSchema
+      .findOne({ email, status: 'active' })
 
-export default async (req, res, next) => {
-  localPassport({ field: 'email' })
-  passport.authenticate('local.user', (err, user) => {
-    if (err || !user) {
-      onError(err, res, next)
-      return
+    if (!model) {
+      return res.status(401).json(onError)
     }
-    req.logIn(user, err, async () => {
-      if (err) {
-        onError(err, res, next)
-        return
-      }
-      const data = {
-        id: user._id
-      }
-      const token = await generateToken(data)
-      res.status(200).json({ token })
-      next()
-    })
-  })(req, res, next)
+
+    const isValidPassword = await model.comparePassword(password)
+
+    if (!isValidPassword) {
+      return res.status(401).json(onError)
+    }
+
+    const data = {
+      id: model._id
+    }
+
+    const token = await generateToken(data)
+
+    res.status(200).json({ token })
+  } catch (err) {
+    res.status(401).json(onError)
+  }
 }

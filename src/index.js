@@ -3,7 +3,6 @@ import compression from 'compression'
 import cors from 'cors'
 import express from 'express'
 import helmet from 'helmet'
-import passport from 'passport'
 
 import { beforeLoggers } from './loggers'
 import {
@@ -28,9 +27,6 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use(compression())
-
-app.use(passport.initialize())
-app.use(passport.session())
 
 app.use(helmet())
 

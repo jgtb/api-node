@@ -1,5 +1,7 @@
 import Schema from './models/schema'
 
+const ignore = (url) => !url.includes('api')
+
 const getModule = (url) => url.split('/api/')[1].split('/')[1]
 const getApiVersion = (url) => url.split('/api/')[1].split('/')[0]
 const getEndpoint = (url, delimiter) => url.split(delimiter)[1]
@@ -15,6 +17,13 @@ export default async (req, _, next) => {
     method,
     originalUrl
   } = req
+
+  const shouldIgnore = ignore(originalUrl)
+
+  if (shouldIgnore) {
+    next()
+    return
+  }
 
   const module = getModule(originalUrl)
   const apiVersion = getApiVersion(originalUrl)

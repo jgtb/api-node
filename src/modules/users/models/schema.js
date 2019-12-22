@@ -28,6 +28,7 @@ schema.pre('save', async function (next) {
 })
 
 schema.methods.comparePassword = function (candidatePassword) {
+  console.log({ candidatePassword })
   return compareSync(candidatePassword, this.password)
 }
 
