@@ -38,7 +38,7 @@ Routes
     '/forgot-password/send-pin',
     accept({ instance: 'body', fields: [ 'email' ] }),
     forgotPasswordSendPin,
-    Functions.patch()
+    Functions.patch({ customSuccessMessage: 'Enviamos um código para o seu email' })
   )
   .patch(
     '/forgot-password/validate-pin',
@@ -49,7 +49,7 @@ Routes
     '/forgot-password',
     accept({ instance: 'body', fields: [ 'email', 'code', 'password' ] }),
     forgotPassword,
-    Functions.patch()
+    Functions.patch({ customSuccessMessage: 'Senha alterada com sucesso' })
   )
   .patch(
     '/password',
