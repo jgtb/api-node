@@ -1,7 +1,7 @@
 import { onSuccess, onError } from '../support/responses'
 import { onPostSuccess, onPostError } from '../support/responses/messages'
 
-export default (Schema, messageConfig) => ({ customMessageConfig, customSuccessMessage, customErrorMessage }) => async (req, res, next) => {
+export default (Schema, messageConfig) => ({ customMessageConfig, customSuccessMessage, customErrorMessage } = {}) => async (req, res, next) => {
   const responseConfig = customMessageConfig || messageConfig
   try {
     const { body, autoInject = {} } = req

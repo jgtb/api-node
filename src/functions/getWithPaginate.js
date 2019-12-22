@@ -5,7 +5,7 @@ import { onGetSuccess, onGetError } from '../support/responses/messages'
 
 import { notFound } from './_utils'
 
-export default (Schema, messageConfig) => ({ customMessageConfig, customSuccessMessage, customErrorMessage }) => async (req, res, next) => {
+export default (Schema, messageConfig) => ({ customMessageConfig, customSuccessMessage, customErrorMessage } = {}) => async (req, res, next) => {
   const responseConfig = customMessageConfig || messageConfig
   try {
     const { filters, autoInject = {}, pipeline = [], sort, paginate } = req
