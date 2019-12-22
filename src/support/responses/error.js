@@ -14,16 +14,10 @@ export default ({ status, message, err = {}, req = {}, res = {} }) => {
     .entries(validators)
     .map(format)
 
-  const errorsDescription = errors
-    .filter(({ description }) => !!description)
-    .map(({ description }) => concatMany('<br>', description, '</br>'))
-    .join('')
-
   const response = {
     status,
     message: req.customMessage ||  message,
-    errors,
-    errorsDescription
+    errors
   }
 
   res.response = response

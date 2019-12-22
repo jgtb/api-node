@@ -7,8 +7,8 @@ const transport = nodemailer.createTransport({
   auth: config.mailer
 })
 
-export default async ({ to, subject, html }) => {
-  await transport.sendMail({
+export default ({ to, subject, html }) => {
+  transport.sendMail({
     from: config.mailer.user,
     to,
     subject,

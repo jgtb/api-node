@@ -12,7 +12,7 @@ export default async (req, res, next) => {
   const response = await compareSync(currentPassword, model.password)
 
   if (!response) {
-    return res.status(409).json({})
+    return res.status(403).json({ message: 'Senhas não conferem' })
   }
 
   const salt = await genSalt(10)
